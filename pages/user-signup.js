@@ -77,7 +77,7 @@ function UserSignupPage() {
       <div className="font-roboto pt-[30px] pb-[50px] flex justify-center font-thin">
         <div className="lg:w-[540px]">
           <h1 className="text-center text-[32px] text-white mb-3">
-            Join with Bedpage
+            Join with back4page
           </h1>
 
           <div className="pt-16 pb-4 border-t border-custom-yellow2">

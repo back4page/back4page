@@ -69,7 +69,7 @@ function DashboardPage() {
       <div className="pb-10">
         <h1 className="text-3xl lg:font-medium">Do you know?</h1>
         <p className="mt-2 text-custom-yellow2 font-medium">
-          You can enjoy a lot of things from bedpage:
+          You can enjoy a lot of things from back4page:
         </p>
         <p className="mt-6">
           <span className="text-custom-yellow2 font-medium pr-1">

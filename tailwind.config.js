@@ -25,6 +25,8 @@ module.exports = {
         "custom-gray6": "#212529",
         "custom-gray7": "#808080",
         "custom-gray8": "#41464d",
+        "custom-gray9": "#6c757d",
+        "custom-gray10": "#5a6268",
         "custom-yellow": "#ffff00",
         "custom-yellow2": "#ffa500",
         "custom-yellow3": "#ffc107",

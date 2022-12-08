@@ -43,7 +43,7 @@ function Header() {
           <Link href="/" passHref>
             <a href="">
               <h1 className="py-[7px] px-2 text-orange-400 font-serif text-4xl font-medium tracking-wide border border-gray-500 select-none">
-                bedpage
+                back4page
                 {/* backpage */}
               </h1>
             </a>

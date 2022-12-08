@@ -12,18 +12,19 @@ function Layout({ children, pageDetails }) {
     <div className="bg-custom-gray text-slate-100">
       <Head>
         <title>
-          free classified site, bedpage , female escorts, body rubs, ts escort,
-          escort ads, adult jobs, strip clubs, exotic dancers, craigslist
-          personal, bed page
+          free classified site, back4page , female escorts, body rubs, ts
+          escort, escort ads, adult jobs, strip clubs, exotic dancers,
+          craigslist personal, bed page
         </title>
-        <meta name="description" content="bedpage" />
-        <meta name="keywords" content="bedpage" />
+        <meta name="description" content="back4page" />
+        <meta name="keywords" content="back4page" />
       </Head>
 
       <>
         {/* <NextNProgress color="red" options={{ showSpinner: false }} />
         <ToastContainer /> */}
-        <div className="container overflow-x-hidden">
+        {/* <div className="container overflow-x-hidden"> */}
+        <div className="container">
           <Header />
 
           {children}

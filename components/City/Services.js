@@ -42,7 +42,7 @@ function Services() {
     <>
       <div className="">
         <h1 className=" text-white text-[32px] lg:font-medium leading-tight">
-          <span className="capitalize">{cityName}</span> Bedpage Classified
+          <span className="capitalize">{cityName}</span> back4page Classified
         </h1>
         <p className="text-[16px] mt-1">
           Find Personal Ads like megapersonal similar to&nbsp;
@@ -54,7 +54,7 @@ function Services() {
           roaming around. Get single girls, hook them up and release your
           pressure. Love the way you are. Enjoy your best moment with backpage
           <span className="capitalize"> {cityName}</span> . If you are looking
-          for bedpage <span className="capitalize">{cityName}</span> or double
+          for back4page <span className="capitalize">{cityName}</span> or double
           list
           <span className="capitalize"> {cityName}</span> you are in perfect
           place.
@@ -70,23 +70,22 @@ function Services() {
               <ul className="mt-2 space-y-4">
                 {service.categories &&
                   service.categories.map((category, i) => (
-                    <li
-                      key={i}
-                      className="text-[15px] ml-[18px] capitalize break-all hover:underline"
-                    >
-                      <Link
-                        href={`/${city}/post/${category
-                          .split("/")
-                          .join("_")
-                          .split(" ")
-                          .join("-")
-                          .split(".")
-                          .join("")
-                          .toLowerCase()}`}
-                      >
-                        {category}
-                      </Link>
-                    </li>
+                    <div key={i} className="flex">
+                      <p className="text-[15px] ml-[18px] capitalize break-all hover:underline">
+                        <Link
+                          href={`/${city}/post/${category
+                            .split("/")
+                            .join("_")
+                            .split(" ")
+                            .join("-")
+                            .split(".")
+                            .join("")
+                            .toLowerCase()}`}
+                        >
+                          {category}
+                        </Link>
+                      </p>
+                    </div>
                   ))}
               </ul>
             </div>
