@@ -13,7 +13,7 @@ function Header() {
 
   const { data, status } = useSession();
 
-  const success = data?.user?.success;
+  const token = data?.user?.token;
 
   // console.log("status", status);
 
@@ -51,7 +51,7 @@ function Header() {
           {/* <Image src="/images/logo.png" alt="logo" width={176} height={60} /> */}
         </div>
         <div className="mt-2 flex justify-between gap-[43px] lg:gap-[211px] text-custom-yellow2 mr-[10px] lg:mr-[140px]">
-          {status === "authenticated" && success && (
+          {status === "authenticated" && token && (
             <div className="hidden lg:block mt-1">
               <div className="px-2 py-1 bg-cyan-600 text-white text-sm rounded">
                 Signed In
