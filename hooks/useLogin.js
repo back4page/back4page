@@ -19,6 +19,7 @@ function useLogin() {
     if (res?.ok) {
       console.log(res);
       router.reload();
+      // toast.success("Signed in Successfully");
       toast.success("Signed in Successfully");
       // router.push("/dashboard");
     }

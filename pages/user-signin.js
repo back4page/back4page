@@ -124,7 +124,7 @@ export async function getServerSideProps(context) {
 
   console.log("session is", session);
 
-  if (session) {
+  if (session?.user?.token) {
     return {
       redirect: {
         destination: "/dashboard",

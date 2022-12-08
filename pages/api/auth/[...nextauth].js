@@ -34,7 +34,7 @@ const nextAuthOptions = (req, res) => {
           console.log("main", user);
 
           // if (response.ok && user) {
-          if (response.ok) {
+          if (response.ok && user?.token && user?.id) {
             res.setHeader("Set-Cookie", [
               // cookie.serialize("token", user.token, {
               //   httpOnly: true,
