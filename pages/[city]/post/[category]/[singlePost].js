@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { FaExclamationTriangle } from "react-icons/fa";
 import Model from "../../../../public/images/models/model4.webp";
@@ -66,9 +67,13 @@ function SinglePost() {
             </p>
             <p>*You must be 18+.</p>
 
-            <button className="mt-7 px-4 py-2 rounded text-white bg-custom-gray9 hover:bg-custom-gray10 focus:ring-[3px] ring-custom-gray10/40 transition duration-300 uppercase">
-              POST AD NOW
-            </button>
+            <Link href="/post-ad" passHref>
+              <a>
+                <button className="mt-7 px-4 py-2 rounded text-white bg-custom-gray9 hover:bg-custom-gray10 focus:ring-[3px] ring-custom-gray10/40 transition duration-300 uppercase">
+                  POST AD NOW
+                </button>
+              </a>
+            </Link>
           </div>
         </div>
       </div>
