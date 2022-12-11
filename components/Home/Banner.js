@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { modelsData } from "../data/modelsData";
+// import { modelsData } from "../data/modelsData";
 
-function Banner() {
+function Banner({ images, title, postId }) {
   return (
     <div className="mb-8">
       <div className="">
@@ -10,23 +10,23 @@ function Banner() {
           Discreet Personal Classified Website that works
         </h1>
         <p className="mt-2">
-          Backpage is no more 2022 but Backpage Alternative is here. Highly
-          strict to child abuse, trafficking. Nothing wrong to visit a personal
-          classified for your search for a dating partner. Backpage Alternative
-          (BackpageAlter.com) is much like Backpage (backpage.com) in 2022 with
-          option to post ads in multiple cities and categories. Our sponsored
-          posts get 10 to 100 times more response than regular posts, stay out
-          of competition in personal ads.
+          Backpage is no more 2022 but Back4Page is here. Highly strict to child
+          abuse, trafficking. Nothing wrong to visit a personal classified for
+          your search for a dating partner. Back4Page (back4Page.com) is much
+          like Backpage (backpage.com) in 2022 with option to post ads in
+          multiple cities and categories. Our sponsored posts get 10 to 100
+          times more response than regular posts, stay out of competition in
+          personal ads.
         </p>
       </div>
 
       <div className="my-[15px]">
         <p className="text-center tracking-[7px] font-light text-slate-200">
-          ---- cover <span className="px-[6px]"></span> stars ----
+          ---- Popular <span className="px-[6px]"></span> Ads ----
         </p>
 
         <div className="mt-4 flex justify-center items-center flex-wrap">
-          {modelsData &&
+          {/* {modelsData &&
             modelsData.map((model, i) => (
               <div
                 key={i}
@@ -40,7 +40,24 @@ function Banner() {
                   // objectFit="cover"
                 />
               </div>
-            ))}
+            ))} */}
+
+          <Link href={`/ad/${postId}`} passHref>
+            <a>
+              <div
+                // key={i}
+                className="border-2 border-black relative w-[100px] h-[100px]"
+              >
+                <Image
+                  src={images}
+                  alt={title}
+                  layout="fill"
+                  priority
+                  // objectFit="cover"
+                />
+              </div>
+            </a>
+          </Link>
         </div>
       </div>
 

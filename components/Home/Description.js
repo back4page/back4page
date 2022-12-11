@@ -2,10 +2,10 @@ function Description() {
   return (
     <div className="space-y-3 text-[15px] pb-7">
       <h4 className="text-3xl lg:font-medium pt-5">
-        Are you a service provider looking for Backpage alternatives? Look no
-        further than back4page.com!
+        Are you a service provider looking for Back4Pages? Look no further than
+        back4page.com!
       </h4>
-      <p>Why You Need a Backpage Alternative</p>
+      <p>Why You Need a Back4Page</p>
       <p>
         Though Backpage has been shut down, it was industry leader in the free,
         classified ads websites. It quickly became well known for its hookup
@@ -72,12 +72,12 @@ function Description() {
       </h4>
       <p>
         Since its commencement, bed page has cemented itself as the best
-        Backpage alternative, despite the fact that hundreds of competitors have
-        popped up in its wake. Many organizations who have chosen to use bed
-        page as their free classified ads web page of choice are flourishing,
-        profiting from the developing ubiquity of back4page, which has now
-        become known as one of the foremost free classified ads websites touting
-        dating and escort services.
+        Back4Page, despite the fact that hundreds of competitors have popped up
+        in its wake. Many organizations who have chosen to use bed page as their
+        free classified ads web page of choice are flourishing, profiting from
+        the developing ubiquity of back4page, which has now become known as one
+        of the foremost free classified ads websites touting dating and escort
+        services.
       </p>
       <p>
         Many people looking for Backpage replacements have put off providing or
@@ -124,10 +124,9 @@ function Description() {
       <p>
         back4page knows that your main motivation for placing ads on the website
         is to draw in traffic to your business, and as a result, more customers.
-        Because bed page is the best Backpage alternative , it boasts a large
-        amount of everyday traffic across the world. More traffic means more
-        eyes on your ads. More impressions means more clicks means more
-        conversations.
+        Because bed page is the best Back4Page , it boasts a large amount of
+        everyday traffic across the world. More traffic means more eyes on your
+        ads. More impressions means more clicks means more conversations.
       </p>
       <p>
         back4page is the one-stop-shop for all your adult arrangement services.
@@ -169,9 +168,9 @@ function Description() {
         someone to talk to on a lonely night.
       </p>
       <p>
-        On other Backpage alternative websites, customers will have to drudge
-        through pages and pages of spam or phony advertisements before ever
-        finding something legitimate that piques their interest.
+        On other Back4Page websites, customers will have to drudge through pages
+        and pages of spam or phony advertisements before ever finding something
+        legitimate that piques their interest.
       </p>
       <p>
         This is not the case with bed page. The search feature allows customers
@@ -278,8 +277,8 @@ function Description() {
       <h4 className="text-3xl lg:font-medium pt-5">Overview</h4>
       <p>
         It is 2021, and it is high time that you or your business finds a
-        better, safer, more secure Backpage alternative. Look no further,
-        because back4page.com is the answer to all of your personal ad problems.
+        better, safer, more secure Back4Page. Look no further, because
+        back4page.com is the answer to all of your personal ad problems.
       </p>
       <p>
         Whatever your needs, wants, or niches, back4page has a place for you to

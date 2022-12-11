@@ -7,22 +7,44 @@ import Locations from "../components/Home/Locations";
 import Layout from "../components/Layout";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
+import { API_URL } from "../config";
+import useGetData from "../hooks/useGetData";
 
+// export default function Home({ image, postId }) {
 export default function Home() {
+  const { fetchedData, isLoading, isError } = useGetData("/most/view");
+
+  const { id, images, title } = !isLoading && fetchedData?.success;
+
+  console.log(fetchedData);
+
   // const { data } = useSession();
 
   // useEffect(() => {
   //   console.log(data);
   // }, [data]);
 
+  // console.log("most view", image, postId);
+
   return (
     <>
-      <Banner />
+      <Banner postId={id} images={images?.[0]} title={title} />
       <Locations />
       <Description />
     </>
   );
 }
+
+// export async function getServerSideProps() {
+//   const url = `${API_URL}/most/view`;
+//   const res = await fetch(url);
+//   const data = await res.json();
+//   const image = data.success.images[0];
+//   const postId = data.success.id;
+//   return {
+//     props: { image, postId },
+//   };
+// }
 
 // export default function Home() {
 //   const [selectedFiles, setSelectedFiles] = useState([]);

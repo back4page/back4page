@@ -1,13 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 import { FaExclamationTriangle } from "react-icons/fa";
-import { API_URL } from "../../../../config";
-import Model from "../../../../public/images/models/model4.webp";
+import { API_URL } from "../../config";
 
-const images = [Model, Model, Model, Model];
-
-function SinglePost({ post }) {
+function SingleAdPage({ post }) {
   return (
     <div className="flex flex-col items-center py-10 lg:px-[100px]">
       <h1 className="text-4xl">{post?.title}</h1>
@@ -84,14 +80,14 @@ function SinglePost({ post }) {
   );
 }
 
-export async function getServerSideProps({ query: { singlePost } }) {
-  const url = `${API_URL}/single/post/get/${singlePost}`;
+export async function getServerSideProps({ query: { singleAd } }) {
+  const url = `${API_URL}/single/post/get/${singleAd}`;
   const res = await fetch(url);
   const data = await res.json();
 
   console.log("data is", data);
 
-  const post = data.success;
+  const post = data?.success;
 
   if (res.ok) {
     return { props: { post } };
@@ -102,4 +98,4 @@ export async function getServerSideProps({ query: { singlePost } }) {
   }
 }
 
-export default SinglePost;
+export default SingleAdPage;

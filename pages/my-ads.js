@@ -4,11 +4,8 @@ import Layout from "../components/Layout";
 import Table from "../components/Table";
 import { adsColumn } from "../components/Table/columns/adsColumn";
 import { API_URL } from "../config";
-import useGetData from "../hooks/useGetData";
 
 function MyAdsPage({ data }) {
-  // const { fetchedData } = useGetData("/post/get/dashboard");
-
   // console.log("fetched", fetchedData);
   const posts = data?.success;
 
