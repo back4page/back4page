@@ -56,7 +56,7 @@ function PostAd({ formTitle, services }) {
   //   console.log(values);
   // };
 
-  const { postData } = usePostData("/post/add/free");
+  const { postData } = usePostData("/post/add/ad");
 
   const handleSubmit = (values, formik) => {
     postData(values, formik);

@@ -69,6 +69,7 @@ function MultiLocationAd({ formTitle, services }) {
 
   const handleSubmit = (values, formik) => {
     postData(values, formik);
+    // console.log(values);
   };
 
   const sponsoredAdOptions = [
