@@ -14,7 +14,7 @@ import useGetData from "../hooks/useGetData";
 export default function Home() {
   const { fetchedData, isLoading, isError } = useGetData("/most/view");
 
-  const { id, images, title } = !isLoading && fetchedData?.success;
+  const popularAds = !isLoading && fetchedData?.success;
 
   console.log(fetchedData);
 
@@ -28,7 +28,7 @@ export default function Home() {
 
   return (
     <>
-      <Banner postId={id} images={images?.[0]} title={title} />
+      <Banner popularAds={popularAds} isLoading={isLoading} isError={isError} />
       <Locations />
       <Description />
     </>

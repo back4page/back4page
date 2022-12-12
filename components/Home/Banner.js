@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 // import { modelsData } from "../data/modelsData";
 
-function Banner({ images, title, postId }) {
+function Banner({ popularAds, isLoading, isError }) {
   return (
     <div className="mb-8">
       <div className="">
@@ -26,23 +26,43 @@ function Banner({ images, title, postId }) {
         </p>
 
         <div className="mt-4 flex justify-center items-center flex-wrap">
-          {/* {modelsData &&
-            modelsData.map((model, i) => (
-              <div
-                key={i}
-                className="border-2 border-black relative w-[100px] h-[100px]"
-              >
-                <Image
-                  src={model.image}
-                  alt={model.name}
-                  layout="fill"
-                  priority
-                  // objectFit="cover"
-                />
-              </div>
-            ))} */}
+          {isLoading && (
+            <p className="text-xl h-[100px] tracking-widest">Loading...</p>
+          )}
+          {isError && <p className="text-xl h-[100px]">Something Went Wrong</p>}
+          {popularAds &&
+            popularAds.map((ad, i) => (
+              <Link key={i} href={`/ad/${ad.id}`} passHref>
+                <a>
+                  <div
+                    // key={i}
+                    className="border-2 border-black relative w-[100px] h-[100px]"
+                  >
+                    <Image
+                      src={ad.images[0]}
+                      alt={ad.title}
+                      layout="fill"
+                      priority
+                      // objectFit="cover"
+                    />
+                  </div>
+                </a>
+              </Link>
+              // <div
+              //   key={i}
+              //   className="border-2 border-black relative w-[100px] h-[100px]"
+              // >
+              //   <Image
+              //     src={model.image}
+              //     alt={model.name}
+              //     layout="fill"
+              //     priority
+              //     // objectFit="cover"
+              //   />
+              // </div>
+            ))}
 
-          <Link href={`/ad/${postId}`} passHref>
+          {/* <Link href={`/ad/${postId}`} passHref>
             <a>
               <div
                 // key={i}
@@ -57,7 +77,7 @@ function Banner({ images, title, postId }) {
                 />
               </div>
             </a>
-          </Link>
+          </Link> */}
         </div>
       </div>
 
