@@ -55,6 +55,7 @@ const nextAuthOptions = (req, res) => {
           } else {
             // console.log("error", user);
             throw new Error(user.error);
+            // throw new Error(user.error || user.message);
           }
         },
       }),

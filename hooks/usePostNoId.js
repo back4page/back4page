@@ -1,14 +1,17 @@
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { API_URL } from "../config";
 
 function usePostNoId(path) {
   const [success, setSuccess] = useState(false);
+  const [response, setResponse] = useState("");
+  const router = useRouter();
   const url = `${API_URL}${path}`;
 
-  console.log(url);
+  console.log("status", success);
 
-  const postData = async (values, formik) => {
+  const postData = async (values) => {
     // console.log(values);
     // return;
 
@@ -24,18 +27,22 @@ function usePostNoId(path) {
     const data = await res.json();
 
     if (res.ok) {
-      console.log("success", data);
-      toast.success("Submitted Successfully");
+      console.log("good", data);
+      toast.success(data.success);
+      // router.push(redirect);
       setSuccess(true);
+      setResponse(data);
       // formik.resetForm();
     } else {
-      console.log("error", data);
+      console.log("bad", data);
       setSuccess(false);
       toast.error("Something Went Wrong");
     }
   };
 
-  return { postData, success };
+  console.log("response", response);
+
+  return { postData, success, response };
 }
 
 export default usePostNoId;

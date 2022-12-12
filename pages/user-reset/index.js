@@ -7,6 +7,8 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import usePostNoId from "../../hooks/usePostNoId";
+import { useEffect } from "react";
+import Cookies from "js-cookie";
 // import Password from "../components/UserReset/Password";
 
 function UserResetPage() {
@@ -16,15 +18,26 @@ function UserResetPage() {
     email: "",
   };
 
-  const { postData, success } = usePostNoId("/password/reset/email");
+  // const { postData, success } = usePostNoId("/password/reset/email");
+  const { postData, success, response } = usePostNoId("/password/resend/email");
 
   const handleSubmit = (values, formik) => {
-    console.log(values);
+    const redirect = "/user-reset/code";
+
+    // postData(values, redirect);
     postData(values);
+    // if (success === true) {
+    //   router.push("/user-reset/code");
+    // }
+    // if (success) return;
+  };
+
+  useEffect(() => {
     if (success) {
+      Cookies.set("id", response?.id);
       router.push("/user-reset/code");
     }
-  };
+  }, [success]);
 
   return (
     <>

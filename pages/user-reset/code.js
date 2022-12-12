@@ -6,19 +6,38 @@ import Link from "next/link";
 // import Email from "../components/UserReset/Email";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import usePostNoId from "../../hooks/usePostNoId";
 // import Password from "../components/UserReset/Password";
+import Cookies from "js-cookie";
+import { useEffect } from "react";
 
 function CodePage() {
   const router = useRouter();
+  const id = Cookies.get("id");
 
   const initialvalues = {
+    id: id,
     code: "",
   };
 
+  const { postData, success } = usePostNoId("/password/code/match");
+
   const handleSubmit = (values, formik) => {
-    console.log(values);
-    router.push("/user-reset/change-password");
+    const redirect = "/user-reset/change-password";
+
+    // postData(values, redirect);
+    postData(values);
+    // if (success) {
+    //   router.push("/user-reset/code");
+    // }
+    // if (!success) return;
   };
+
+  useEffect(() => {
+    if (success) {
+      router.push("/user-reset/change-password");
+    }
+  }, [success]);
 
   return (
     <div className="font-roboto pt-[30px] pb-[350px] flex justify-center font-thin">
