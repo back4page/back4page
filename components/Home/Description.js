@@ -20,7 +20,7 @@ function Description() {
           </p>
           <p>
             The united states department of Justice seized Backpage on the
-            ground of human trafficking and prostitution in 2018.M
+            ground of human trafficking and prostitution in 2018.
           </p>
           <p>
             After this, it is essential to search for a safer alternative to
