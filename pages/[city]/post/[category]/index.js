@@ -153,6 +153,12 @@ export async function getServerSideProps({ query }) {
   console.log(url);
   const res = await fetch(url);
 
+  if (!res.ok) {
+    return {
+      notFound: true,
+    };
+  }
+
   const data = await res.json();
 
   // console.log(data);

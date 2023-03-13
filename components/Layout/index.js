@@ -12,11 +12,13 @@ function Layout({ children, pageDetails }) {
     <div className="bg-custom-gray text-slate-100">
       <Head>
         <title>
-          free classified site, back4page , female escorts, body rubs, ts
-          escort, escort ads, adult jobs, strip clubs, exotic dancers,
-          craigslist personal, bed page
+          best classified site, free ads posting site, female escort, secure
+          dating site.
         </title>
-        <meta name="description" content="back4page" />
+        <meta
+          name="description"
+          content="In 2023 Back4page is the best dating site, you can find here secure dating from legit provider."
+        />
         <meta name="keywords" content="back4page" />
       </Head>
 

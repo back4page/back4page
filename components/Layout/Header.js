@@ -42,10 +42,19 @@ function Header() {
         <div className="">
           <Link href="/" passHref>
             <a href="">
-              <h1 className="py-[7px] px-2 text-orange-400 font-serif text-4xl font-medium tracking-wide border border-gray-500 select-none">
+              <div className="mt-1 relative w-[120px] h-[60px]">
+                <Image
+                  src="/images/back4page-logo2.jpg"
+                  alt="back4page logo"
+                  // width={176}
+                  // height={60}
+                  layout="fill"
+                  objectFit="cover"
+                />
+              </div>
+              {/* <h1 className="py-[7px] px-2 text-orange-400 font-serif text-4xl font-medium tracking-wide border border-gray-500 select-none">
                 back4page
-                {/* backpage */}
-              </h1>
+              </h1> */}
             </a>
           </Link>
           {/* <Image src="/images/logo.png" alt="logo" width={176} height={60} /> */}

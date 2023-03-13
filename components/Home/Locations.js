@@ -17,12 +17,12 @@ function Locations() {
               <h1 className=" text-white text-[32px] lg:font-medium">
                 {country.name} {currentYear}
               </h1>
-              <p className="text-[16px]">
+              {/* <p className="text-[16px]">
                 Backpage replacement in {country.name}, all the states, every
                 city, downtown, suburb, municipal area. Find a match from below
                 or post your own ads and enjoy tonns of knocks - message, calls,
                 inboxes, emails from {country.name}.
-              </p>
+              </p> */}
             </div>
             <div className="mt-4 space-y-8 columns-2 lg:columns-3">
               {country.states &&
