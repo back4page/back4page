@@ -6,8 +6,6 @@ import { useState } from "react";
 function Locations() {
   const [showCountries, setShowCountries] = useState(false);
 
-  const currentYear = new Date().getFullYear();
-
   const toggle = (country) => {
     if (showCountries === country) {
       return setShowCountries(null);
@@ -23,11 +21,10 @@ function Locations() {
           <div key={i} className="">
             <div className="">
               <button
-                className="w-full text-start bg-gray-600/80 p-3 rounded-lg text-white text-2xl lg:text-[32px] lg:font-medium"
+                className="w-full text-start bg-gray-900 text-custom-yellow p-3 rounded-lg text-2xl lg:text-[32px] lg:font-medium"
                 onClick={() => toggle(country.name)}
               >
                 {country.name}
-                {/* {currentYear} */}
               </button>
               {/* <p className="text-[16px]">
                 Backpage replacement in {country.name}, all the states, every

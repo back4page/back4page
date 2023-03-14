@@ -81,18 +81,18 @@ function Banner({ popularAds, isLoading, isError }) {
         </div>
       </div>
 
-      <div className="mt-4 flex flex-wrap gap-[20px] lg:gap-[30px]">
-        <div className="">
-          <p className=" text-gray-800 bg-custom-blue rounded-md text-right lg:text-left py-[11px]  lg:pl-[193px] pr-[20px] lg:pr-[35px]">
+      <div className="mt-4 flex flex-col lg:items-center lg:flex-row gap-[20px] lg:gap-[30px]">
+        <div className="flex-1 px-2 text-gray-800 bg-custom-blue rounded-md text-center  py-[11px]">
+          <p className="">
             Post your own ad {">"} get emails and calls {">"} Select one {"> "}
-            Start dating. You must be 18+
+            Find your perfect match. You must be 18+
           </p>
         </div>
 
-        <div className="">
+        <div className="lg:mr-28">
           <Link href="/post-ad" passHref>
             <a>
-              <button className="bg-custom-yellow3 px-[7px] py-[6px]  text-gray-800  uppercase rounded hover:bg-custom-yellow4 focus:bg-custom-yellow4 transition duration-200 focus:ring-4 ring-yellow-800">
+              <button className="bg-custom-yellow3 px-[7px] py-2  text-gray-800  uppercase rounded hover:bg-custom-yellow4 focus:bg-custom-yellow4 transition duration-200 focus:ring-4 ring-yellow-800">
                 Post Ad Now
               </button>
             </a>
