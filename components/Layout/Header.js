@@ -38,7 +38,7 @@ function Header() {
 
   return (
     <>
-      <div className="flex gap-[15px] lg:gap-0 lg:justify-between pt-[1px]">
+      <div className="flex items-center gap-[15px] justify-between pt-[1px] border-b border-gray-500 pb-2">
         <div className="">
           <Link href="/" passHref>
             <a href="">
@@ -59,17 +59,17 @@ function Header() {
           </Link>
           {/* <Image src="/images/logo.png" alt="logo" width={176} height={60} /> */}
         </div>
-        <div className="mt-2 flex justify-between gap-[43px] lg:gap-[211px] text-custom-yellow2 mr-[10px] lg:mr-[140px]">
+        <div className="flex justify-between gap-[43px] lg:gap-[211px] text-custom-yellow2 mr-[10px] lg:mr-[140px]">
           {status === "authenticated" && token && (
-            <div className="hidden lg:block mt-1">
+            <div className="hidden lg:block">
               <div className="px-2 py-1 bg-cyan-600 text-white text-sm rounded">
                 Signed In
               </div>
             </div>
           )}
 
-          <div className="">
-            {/* <Link href="/user-signin" passHref> */}
+          {/* <div className="">
+   
             <Link href="/post-ad" passHref>
               <a>
                 <button className="button px-[8px] py-[6px] text-sm uppercase">
@@ -77,12 +77,9 @@ function Header() {
                 </button>
               </a>
             </Link>
-          </div>
+          </div> */}
 
-          <div
-            className="mt-[5px] text-[23px]"
-            onClick={() => setShowMenu(true)}
-          >
+          <div className="text-[23px]" onClick={() => setShowMenu(true)}>
             <FaBars />
           </div>
         </div>

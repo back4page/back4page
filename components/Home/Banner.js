@@ -5,7 +5,7 @@ import Link from "next/link";
 function Banner({ popularAds, isLoading, isError }) {
   return (
     <div className="mb-8">
-      <div className="">
+      {/* <div className="">
         <h1 className="text-custom-yellow text-[40px] lg:font-semibold leading-tight">
           Discreet Personal Classified Website that works
         </h1>
@@ -18,7 +18,7 @@ function Banner({ popularAds, isLoading, isError }) {
           times more response than regular posts, stay out of competition in
           personal ads.
         </p>
-      </div>
+      </div> */}
 
       <div className="my-[15px]">
         <p className="text-center tracking-[7px] font-light text-slate-200">
@@ -83,7 +83,7 @@ function Banner({ popularAds, isLoading, isError }) {
 
       <div className="mt-4 flex flex-wrap gap-[20px] lg:gap-[30px]">
         <div className="">
-          <p className=" text-gray-800 bg-custom-blue rounded-md text-right lg:text-left py-[11px] pl-[30px] lg:pl-[193px] pr-[20px] lg:pr-[35px]">
+          <p className=" text-gray-800 bg-custom-blue rounded-md text-right lg:text-left py-[11px]  lg:pl-[193px] pr-[20px] lg:pr-[35px]">
             Post your own ad {">"} get emails and calls {">"} Select one {"> "}
             Start dating. You must be 18+
           </p>
