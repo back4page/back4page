@@ -197,9 +197,8 @@ function MenuModal({ showMenu, setShowMenu, node, status }) {
             >
               <div className="" ref={node}>
                 <div className="p-4 ">
-                  <h2 className="text-2xl lg:font-semibold">
-                    back4page Menu
-                    {/* Backpage Alter Menu */}
+                  <h2 className="text-2xl lg:font-bold text-gray-700">
+                    Back4page
                   </h2>
                   <button
                     className="absolute top-[2px] right-[2px] focus:ring-2 ring-slate-800 transition duration-100 rounded px-[14px] py-[18px] text-gray-400 hover:text-gray-600"
