@@ -79,9 +79,9 @@ function Header() {
             </Link>
           </div> */}
 
-          <div className="text-[23px]" onClick={() => setShowMenu(true)}>
+          <button className="text-[23px]" onClick={() => setShowMenu(true)}>
             <FaBars />
-          </div>
+          </button>
         </div>
       </div>
 
