@@ -16,7 +16,7 @@ function DashboardPage() {
 
   return (
     <>
-      <div className="py-1">
+      <div className="mt-4 py-1">
         <div className="grid grid-cols-2 gap-[30px] text-custom-yellow2">
           <div className="">
             <div className="rounded border border-gray-800/50 bg-custom-gray2 overflow-hidden">

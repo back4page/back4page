@@ -1,60 +1,51 @@
-import React from "react";
 import { Formik, Form } from "formik";
-import Layout from "../components/Layout";
 import { TextField } from "../components/common/InputField";
 import { FaAt, FaLock } from "react-icons/fa";
 import Link from "next/link";
-import { API_URL } from "../config";
 import useLogin from "../hooks/useLogin";
-import { getSession } from "next-auth/react";
-// import { unstable_getServerSession } from "next-auth";
-// import { RotatingLines } from "react-loader-spinner";
-// import { ToastContainer, toast } from "react-toastify";
+// import { getSession } from "next-auth/react";
+import { getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]";
+import Image from "next/image";
 
 function UserSigninPage() {
-  const initialvalues = {
-    email: "",
-    password: "",
-  };
+  // const initialvalues = {
+  //   email: "",
+  //   password: "",
+  // };
 
   const { loginUser } = useLogin();
 
-  const handleSubmit = async (values, formik) => {
-    // console.log(values);
+  // const handleSubmit = async (values, formik) => {
+  //   // console.log(values);
 
-    loginUser(values);
-
-    // const url = `${API_URL}/user/login`;
-
-    // const res = await fetch(url, {
-    //   method: "POST",
-    //   headers: {
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(values),
-    // });
-
-    // const data = await res.json();
-
-    // if (res.ok) {
-    //   console.log("success", data);
-    //   // formik.resetForm();
-    // } else {
-    //   console.log("error", data);
-    // }
-  };
+  //   loginUser(values);
+  // };
 
   return (
     <>
-      {/* <ToastContainer /> */}
       <div className="font-roboto pt-[30px] pb-[360px] flex justify-center font-thin">
         <div className="lg:w-[540px]">
           <h1 className="text-center text-[32px] text-white">
             Sign in: back4page
           </h1>
 
-          <div className="pt-10 pb-4">
+          <div className="flex justify-center">
+            <button
+              className="mt-6 px-3 py-2 bg-white text-[#7F7F7F] font-bold flex items-center gap-3 rounded-sm shadow"
+              onClick={() => loginUser()}
+            >
+              <Image
+                src="/images/google-logo.png"
+                alt="google logo"
+                width={25}
+                height={25}
+              />
+              <p className="">Continue with Google</p>
+            </button>
+          </div>
+
+          {/* <div className="pt-10 pb-4">
             <Formik
               initialValues={initialvalues}
               // validationSchema={validate}
@@ -90,19 +81,15 @@ function UserSigninPage() {
                 </Form>
               )}
             </Formik>
-          </div>
+          </div> */}
 
-          <div className="flex flex-col items-center">
+          {/* <div className="flex flex-col items-center">
             <div className="lg:pr-32 text-center font-extralight text-custom-yellow2 hover:text-custom-blue2 hover:underline">
               <Link href="/user-reset">Forgot Password?</Link>
             </div>
             <p className="pt-[41px] font-extralight text-custom-yellow2">
               Don`t have an account?
             </p>
-
-            {/* <button className="button self-end mt-4 mr-[116px] capitalize px-[13px] py-[7px]">
-              Join Now
-            </button> */}
 
             <Link href="/user-signup" passHref>
               <a>
@@ -111,20 +98,22 @@ function UserSigninPage() {
                 </button>
               </a>
             </Link>
-          </div>
+          </div> */}
         </div>
       </div>
     </>
   );
 }
 
-export async function getServerSideProps(context) {
-  const session = await getSession(context);
+export async function getServerSideProps({ req, res }) {
+  // const session = await getSession(context);
   // const session = await unstable_getServerSession(context.req, context.res);
 
-  console.log("session is", session);
+  // console.log("session is", session);
 
-  if (session?.user?.token) {
+  const session = await getServerSession(req, res, authOptions);
+
+  if (session) {
     return {
       redirect: {
         destination: "/dashboard",
@@ -132,6 +121,15 @@ export async function getServerSideProps(context) {
       },
     };
   }
+
+  // if (session?.user?.token) {
+  //   return {
+  //     redirect: {
+  //       destination: "/dashboard",
+  //       permanent: false,
+  //     },
+  //   };
+  // }
 
   return {
     props: {},

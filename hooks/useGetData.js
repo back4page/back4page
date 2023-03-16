@@ -63,7 +63,9 @@ function useGetData(route) {
   // const url = `${API_URL}${route}/0388b9b5-6d20-4de9-9411-660cfb5b6eb7`;
   // console.log(url);
 
-  const { data: fetchedData, error } = useSWR(url, fetcher);
+  const { data: fetchedData, error } = useSWR(url, fetcher, {
+    shouldRetryOnError: false,
+  });
 
   return {
     fetchedData: fetchedData ? fetchedData : "",

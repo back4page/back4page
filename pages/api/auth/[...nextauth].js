@@ -1,274 +1,186 @@
-import NextAuth from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
-import cookie from "cookie";
+import NextAuth from "next-auth/next";
+import GoogleProvider from "next-auth/providers/google";
 import { API_URL } from "../../../config";
 
-const nextAuthOptions = (req, res) => {
-  return {
-    // session: {
-    //   strategy: "jwt",
-    // },
-    providers: [
-      CredentialsProvider({
-        name: "Credentials",
-        // credentials: {},
-        authorize: async (credentials) => {
-          // const payload = {
-          //   email: credentials.email,
-          //   password: credentials.password,
-          // };
-          const { ...values } = credentials;
+export const authOptions = {
+  providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    }),
+  ],
 
-          const url = `${API_URL}/user/login`;
+  pages: {
+    signIn: "/user-signin",
+    // error: "/404",
+  },
 
-          const response = await fetch(url, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(values),
-          });
+  callbacks: {
+    async signIn({ user, account }) {
+      if (account.provider === "google") {
+        // const url = `${API_URL}/user/login`;
+        // const response = await fetch(url, {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //     // Authorization: `Bearer ${secret}`, //secret from .env
+        //   },
+        //   body: JSON.stringify(user),
+        // });
 
-          const user = await response.json();
+        // const data = await response.json();
 
-          console.log("main", user);
+        const response = {
+          ok: true,
+        }; //fake response
 
-          // if (response.ok && user) {
-          if (response.ok && user.token && user.id) {
-            res.setHeader("Set-Cookie", [
-              // cookie.serialize("token", user.token, {
-              //   httpOnly: true,
-              //   secure: process.env.NODE_ENV !== "development",
-              //   maxAge: 30 * 24 * 60 * 60, // 30 days
-              //   sameSite: "strict",
-              //   path: "/",
-              // }),
-              cookie.serialize("id", user.id, {
-                // httpOnly: true,
-                // secure: process.env.NODE_ENV !== "development",
-                maxAge: 30 * 24 * 60 * 60, // 30 days
-                sameSite: "strict",
-                path: "/",
-              }),
-            ]);
-            return user;
-          } else {
-            // console.log("error", user);
-            throw new Error(user.error);
-            // throw new Error(user.error || user.message);
-          }
-        },
-      }),
-    ],
+        const data = {
+          token: response.ok ? "token from backend" : null,
+        }; //fake data
 
-    pages: {
-      signIn: "/user-signin",
+        if (response.ok) {
+          // console.log("success", data);
+          user.accessToken = data.token; //data.token could change
+
+          return true;
+        } else {
+          // console.log("error", data);
+          return false;
+        }
+      }
+
+      return false;
     },
 
-    callbacks: {
-      jwt: async ({ token, user, account }) => {
-        // console.log("xxs", token);
-        if (user) {
-          token.user = user;
+    async jwt({ token, user }) {
+      if (user) {
+        // console.log("jwt token", token);
+        token.accessToken = user.accessToken;
+      }
 
-          token.accessToken = user.access_token;
-
-          // token.token = user.token;
-          // token.id = user.id;
-          // token.role = user.role;
-          // token.user_name = user.user_name;
-          // token.institution_name = user.institution_name;
-        }
-        if (account) {
-          token.accessToken = account.access_token;
-        }
-
-        // console.log("account is", account);
-
-        return token;
-      },
-      session: async ({ session, token }) => {
-        if (token) {
-          session.user = token.user;
-          // session.token = token.user.token;
-          // session.id = token.user.id;
-          // session.identity_id = token.user.identity_id;
-        }
-
-        // console.log("session IS", session);
-
-        return session;
-      },
+      return token;
     },
 
-    secret: process.env.NEXTAUTH_SECRET,
-  };
+    async session({ token, session }) {
+      if (token) {
+        session.accessToken = token.accessToken;
+      }
+
+      return session;
+    },
+  },
 };
 
-export default (req, res) => {
-  return NextAuth(req, res, nextAuthOptions(req, res));
-};
+export default NextAuth(authOptions);
 
+//with credentials
 // import NextAuth from "next-auth";
-// import cookie from "cookie";
 // import CredentialsProvider from "next-auth/providers/credentials";
+// import cookie from "cookie";
 // import { API_URL } from "../../../config";
 
-// export default NextAuth({
-//   providers: [
-//     CredentialsProvider({
-//       name: "Credentials",
-//       authorize: async (credentials, req) => {
-//         // const payload = {
-//         //   email: credentials.email,
-//         //   password: credentials.password,
-//         // };
-//         const { loginRoute, ...values } = credentials;
+// const nextAuthOptions = (req, res) => {
+//   return {
+//     // session: {
+//     //   strategy: "jwt",
+//     // },
+//     providers: [
+//       CredentialsProvider({
+//         name: "Credentials",
+//         // credentials: {},
+//         authorize: async (credentials) => {
+//           // const payload = {
+//           //   email: credentials.email,
+//           //   password: credentials.password,
+//           // };
+//           const { ...values } = credentials;
 
-//         const url = `${API_URL}/${loginRoute}/login`;
+//           const url = `${API_URL}/user/login`;
 
-//         const response = await fetch(url, {
-//           method: "POST",
-//           headers: {
-//             "Content-Type": "application/json",
-//           },
-//           body: JSON.stringify(values),
-//         });
+//           const response = await fetch(url, {
+//             method: "POST",
+//             headers: {
+//               "Content-Type": "application/json",
+//             },
+//             body: JSON.stringify(values),
+//           });
 
-//         const user = await response.json();
+//           const user = await response.json();
 
-//         // console.log(user);
+//           console.log("main", user);
 
-//         if (response.ok && user) {
-// res.setHeader("Set-Cookie", [
-//   cookie.serialize("role", user.role, {
-//     // httpOnly: true,
-//     // secure: process.env.NODE_ENV !== "development",
-//     maxAge: 60 * 60 * 24 * 7, //1 week
-//     sameSite: "strict",
-//     path: "/",
-//   }),
-//   cookie.serialize("id", user.id, {
-//     // httpOnly: true,
-//     // secure: process.env.NODE_ENV !== "development",
-//     maxAge: 60 * 60 * 24 * 7, //1 week
-//     sameSite: "strict",
-//     path: "/",
-//   }),
-//   cookie.serialize("institution_name", user.institution_name, {
-//     // httpOnly: true,
-//     // secure: process.env.NODE_ENV !== "development",
-//     maxAge: 60 * 60 * 24 * 7, //1 week
-//     sameSite: "strict",
-//     path: "/",
-//   }),
-//   cookie.serialize("user_name", user.user_name, {
-//     // httpOnly: true,
-//     // secure: process.env.NODE_ENV !== "development",
-//     maxAge: 60 * 60 * 24 * 7, //1 week
-//     sameSite: "strict",
-//     path: "/",
-//   }),
-// ]);
-//           return user;
-//         } else {
-//           // console.log("error", user);
-//           throw new Error(user.message);
-//         }
-//       },
-//     }),
-//   ],
+//           // if (response.ok && user) {
+//           if (response.ok && user.token && user.id) {
+//             res.setHeader("Set-Cookie", [
+//               // cookie.serialize("token", user.token, {
+//               //   httpOnly: true,
+//               //   secure: process.env.NODE_ENV !== "development",
+//               //   maxAge: 30 * 24 * 60 * 60, // 30 days
+//               //   sameSite: "strict",
+//               //   path: "/",
+//               // }),
+//               cookie.serialize("id", user.id, {
+//                 // httpOnly: true,
+//                 // secure: process.env.NODE_ENV !== "development",
+//                 maxAge: 30 * 24 * 60 * 60, // 30 days
+//                 sameSite: "strict",
+//                 path: "/",
+//               }),
+//             ]);
+//             return user;
+//           } else {
+//             // console.log("error", user);
+//             throw new Error(user.error);
+//             // throw new Error(user.error || user.message);
+//           }
+//         },
+//       }),
+//     ],
 
-//   // pages: {
-//   //   signIn: "/login/super-admin",
-//   // },
-
-//   callbacks: {
-//     jwt: async ({ token, user }) => {
-//       if (user) {
-//         token.user = user;
-
-//         // token.token = user.token;
-//         // token.id = user.id;
-//         // token.role = user.role;
-//         // token.user_name = user.user_name;
-//         // token.institution_name = user.institution_name;
-//       }
-
-//       return token;
+//     pages: {
+//       signIn: "/user-signin",
 //     },
-//     session: async ({ session, token }) => {
-//       if (token) {
-//         session.user = token.user;
-//         // session.token = token.token;
-//         // session.id = token.id;
-//         // session.role = token.role;
-//         // session.user_name = token.user_name;
-//         // session.institution_name = token.institution_name;
-//       }
 
-//       return session;
-//     },
-//   },
-//   secret: process.env.NEXTAUTH_SECRET,
-// });
-
-// const providers = [
-//   CredentialProvider({
-// name: "Credentials",
-// authorize: async (credentials, req) => {
-//   const payload = {
-//     email: credentials.email,
-//     password: credentials.password,
-//   };
-//   const { loginRoute } = credentials;
-
-//   const url = `${API_URL}${loginRoute}/login`;
-
-//   const res = await fetch(url, {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(payload),
-//   });
-
-//   const user = await res.json();
-
-//   console.log(user);
-
-//   if (res.ok) {
-//     return user;
-//   } else {
-//     console.log("error", user);
-//   }
-
-//   return null;
-// },
-//   }),
-// ];
-
-// const callbacks = {
-//   // Getting the JWT token from API response
-//   async jwt(token, user) {
+// callbacks: {
+//   jwt: async ({ token, user, account }) => {
+//     // console.log("xxs", token);
 //     if (user) {
-//       token.accessToken = user.token;
-//       token.id = user.id;
+//       token.user = user;
+
+//       token.accessToken = user.access_token;
+
+//       // token.token = user.token;
+//       // token.id = user.id;
+//       // token.role = user.role;
+//       // token.user_name = user.user_name;
+//       // token.institution_name = user.institution_name;
 //     }
+//     if (account) {
+//       token.accessToken = account.access_token;
+//     }
+
+//     // console.log("account is", account);
 
 //     return token;
 //   },
+//   session: async ({ session, token }) => {
+//     if (token) {
+//       session.user = token.user;
+//       // session.token = token.user.token;
+//       // session.id = token.user.id;
+//       // session.identity_id = token.user.identity_id;
+//     }
 
-//   async session(session, user) {
-//     session.accessToken = user.token;
-//     session.id = user.id;
+//     // console.log("session IS", session);
+
 //     return session;
 //   },
+// },
+
+//     secret: process.env.NEXTAUTH_SECRET,
+//   };
 // };
 
-// const options = {
-//   providers,
-//   callbacks,
+// export default (req, res) => {
+//   return NextAuth(req, res, nextAuthOptions(req, res));
 // };
-
-// export default (req, res) => NextAuth(req, res, options);

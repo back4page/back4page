@@ -44,7 +44,7 @@ function Services() {
         <h1 className=" text-white text-[32px] lg:font-medium leading-tight">
           <span className="capitalize">{cityName}</span> back4page Classified
         </h1>
-        <p className="text-[16px] mt-1">
+        {/* <p className="text-[16px] mt-1">
           Find Personal Ads like megapersonal similar to&nbsp;
           <i>
             Craiglist
@@ -58,7 +58,7 @@ function Services() {
           list
           <span className="capitalize"> {cityName}</span> you are in perfect
           place.
-        </p>
+        </p> */}
       </div>
       <div className="mt-5 space-y-8 columns-2 lg:columns-3">
         {servicesData &&

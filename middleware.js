@@ -1,92 +1,58 @@
-// // import { withAuth } from "next-auth/middleware";
-// // import { NextResponse } from "next/server";
-
-// // export default withAuth(
-// //   function middleware(req) {
-// //     return NextResponse.redirect(new URL("/admin", req.url));
-// //   },
-// //   {
-// //     callbacks: {
-// //       authorized({ token }) {
-// //         return token?.role === "super admin";
-// //       },
-// //     },
-// //   }
-// // );
-
-// // export const config = {
-// //   matchers: ["/", "/login:path*"],
-// // };
-
-// // export { default } from "next-auth/middleware"
 // import { NextResponse } from "next/server";
 // import { getToken } from "next-auth/jwt";
-// import { withAuth } from "next-auth/middleware";
+// // import { getServerSession } from "next-auth";
+// // import { authOptions } from "./pages/api/auth/[...nextauth]";
 
-// // import { Session } from "next-auth";
+// const secret = process.env.NEXTAUTH_SECRET;
 
-// // export default withAuth(function middleware(req) {
-// //   const { url, nextauth } = req;
-// //   const { origin, pathname } = req.nextUrl;
+// export default async function middleware(req, res) {
+//   // const { url, nextauth } = req;
+//   const { origin, pathname } = req.nextUrl;
 
-// //   console.log("nextauth", nextauth.token.user.token);
+//   // const session = getServerSession(req, res, authOptions);
 
-// //   // if (pathname === "/dashboard") {
-// //   //   return NextResponse.redirect(`${origin}/user-signin`);
-// //   // }
-// //   // if (url.includes("/post-ad")) {
-// //   //   return NextResponse.redirect(`${origin}/user-signin`);
-// //   // }
-// //   return NextResponse.next();
-// // });
+//   // console.log("session fom middleware", session);
 
-import { NextResponse } from "next/server";
-import { getToken } from "next-auth/jwt";
+//   const jwt = await getToken({ req, secret });
+//   const token = jwt?.user?.token;
 
-const secret = process.env.NEXTAUTH_SECRET;
+//   console.log("middleware token", token);
 
-export default async function middleware(req) {
-  // const { url, nextauth } = req;
-  const { origin, pathname } = req.nextUrl;
+//   const redirectPage = () => NextResponse.redirect(`${origin}/user-signin`);
 
-  const jwt = await getToken({ req, secret });
-  const token = jwt?.user?.token;
+//   // if (!token) {
+//   //   // if (pathname.startsWith("/post-ad")) {
+//   //   //   return NextResponse.rewrite(new URL(`${origin}/user-signin`, req.url));
+//   //   // }
 
-  // console.log("middleware token", token);
+//   //   if (pathname.startsWith("/post-ad")) {
+//   //     return redirectPage();
+//   //   }
+//   //   if (pathname === "/dashboard") {
+//   //     return redirectPage();
+//   //   }
+//   //   if (pathname === "/user-profile") {
+//   //     return redirectPage();
+//   //   }
+//   //   if (pathname === "/buy-credit") {
+//   //     return redirectPage();
+//   //   }
+//   //   if (pathname === "/premium") {
+//   //     return redirectPage();
+//   //   }
+//   //   if (pathname === "/message-blast") {
+//   //     return redirectPage();
+//   //   }
+//   //   if (pathname === "/my-ads") {
+//   //     return redirectPage();
+//   //   }
+//   //   return NextResponse.next();
+//   // }
 
-  const redirectPage = () => NextResponse.redirect(`${origin}/user-signin`);
+//   return NextResponse.next();
+// }
 
-  if (!token) {
-    // if (pathname.startsWith("/post-ad")) {
-    //   return NextResponse.rewrite(new URL(`${origin}/user-signin`, req.url));
-    // }
-
-    if (pathname.startsWith("/post-ad")) {
-      return redirectPage();
-    }
-    if (pathname === "/dashboard") {
-      return redirectPage();
-    }
-    if (pathname === "/user-profile") {
-      return redirectPage();
-    }
-    if (pathname === "/buy-credit") {
-      return redirectPage();
-    }
-    if (pathname === "/premium") {
-      return redirectPage();
-    }
-    if (pathname === "/message-blast") {
-      return redirectPage();
-    }
-    if (pathname === "/my-ads") {
-      return redirectPage();
-    }
-    return NextResponse.next();
-  }
-
-  return NextResponse.next();
-}
+export { default } from "next-auth/middleware";
 
 export const config = {
   matcher: [

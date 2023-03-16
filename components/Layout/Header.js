@@ -16,6 +16,7 @@ function Header() {
   const token = data?.user?.token;
 
   // console.log("status", status);
+  console.log("data", data);
 
   // useEffect(() => {
   //   showMenu &&
@@ -59,12 +60,30 @@ function Header() {
           </Link>
           {/* <Image src="/images/logo.png" alt="logo" width={176} height={60} /> */}
         </div>
-        <div className="flex justify-between gap-[43px] lg:gap-[211px] text-custom-yellow2 mr-[10px] lg:mr-[140px]">
-          {status === "authenticated" && token && (
+        {/* <div className="flex items-center gap-10 text-custom-yellow2 mr-[10px] lg:mr-[140px]"> */}
+        <div className="flex items-center gap-10 text-custom-yellow2">
+          {/* {status === "authenticated" && token && (
             <div className="hidden lg:block">
               <div className="px-2 py-1 bg-cyan-600 text-white text-sm rounded">
                 Signed In
               </div>
+            </div>
+          )} */}
+
+          {status === "authenticated" && (
+            <div className="flex items-center gap-3 text-white">
+              {/* <p className="">username: {data.user.name}</p> */}
+              <p className="hidden lg:block text-sm">{data.user.email}</p>
+
+              {/* <div className="rounded-full overflow-hidden"> */}
+              <Image
+                src={data.user.image}
+                alt="user picture"
+                className="rounded-full"
+                width={30}
+                height={30}
+              />
+              {/* </div> */}
             </div>
           )}
 

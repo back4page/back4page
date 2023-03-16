@@ -20,7 +20,8 @@ export const modalLinks = [
   },
   {
     name: "Sign Up",
-    link: "/user-signup",
+    link: "/user-signin",
+    // link: "/user-signup",
     icon: <FaCheckSquare />,
   },
   {
