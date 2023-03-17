@@ -18,29 +18,37 @@ export const authOptions = {
   callbacks: {
     async signIn({ user, account }) {
       if (account.provider === "google") {
-        // const url = `${API_URL}/user/login`;
-        // const response = await fetch(url, {
-        //   method: "POST",
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //     // Authorization: `Bearer ${secret}`, //secret from .env
-        //   },
-        //   body: JSON.stringify(user),
-        // });
+        const userInfo = {
+          name: user.name,
+          email: user.email,
+          image: user.image,
+          secret_key: process.env.SECRET_KEY,
+        };
 
-        // const data = await response.json();
+        const url = `${API_URL}/user/login`;
+        const response = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            // Authorization: `Bearer ${secret}`, //secret from .env
+          },
+          body: JSON.stringify(userInfo),
+        });
 
-        const response = {
-          ok: true,
-        }; //fake response
+        const data = await response.json();
 
-        const data = {
-          token: response.ok ? "token from backend" : null,
-        }; //fake data
+        // const response = {
+        //   ok: true,
+        // }; //fake response
+
+        // const data = {
+        //   token: response.ok ? "token from backend" : null,
+        // }; //fake data
 
         if (response.ok) {
-          // console.log("success", data);
-          user.accessToken = data.token; //data.token could change
+          console.log("success", data);
+          user.token = data.token; //data.token could change
+          user.id = data.id; //data.token could change
 
           return true;
         } else {
@@ -55,7 +63,8 @@ export const authOptions = {
     async jwt({ token, user }) {
       if (user) {
         // console.log("jwt token", token);
-        token.accessToken = user.accessToken;
+        token.token = user.token;
+        token.id = user.id;
       }
 
       return token;
@@ -63,7 +72,8 @@ export const authOptions = {
 
     async session({ token, session }) {
       if (token) {
-        session.accessToken = token.accessToken;
+        session.user.token = token.token;
+        session.user.id = token.id;
       }
 
       return session;

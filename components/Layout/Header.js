@@ -13,10 +13,8 @@ function Header() {
 
   const { data, status } = useSession();
 
-  const token = data?.user?.token;
-
   // console.log("status", status);
-  console.log("data", data);
+  // console.log("data", data);
 
   // useEffect(() => {
   //   showMenu &&

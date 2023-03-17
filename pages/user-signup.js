@@ -9,7 +9,9 @@ import { API_URL } from "../config";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import useLogin from "../hooks/useLogin";
-import { getSession, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
+import { getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]";
 
 function UserSignupPage() {
   const [showCodeInput, setShowCodeInput] = useState(false);
@@ -185,8 +187,8 @@ function UserSignupPage() {
   );
 }
 
-export async function getServerSideProps(context) {
-  const session = await getSession(context);
+export async function getServerSideProps({ req, res }) {
+  const session = await getServerSession(req, res, authOptions);
 
   if (session) {
     return {

@@ -1,4 +1,5 @@
-import { getSession } from "next-auth/react";
+import { getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]";
 
 function VerificationPage() {
   return (
@@ -15,8 +16,8 @@ function VerificationPage() {
   );
 }
 
-export async function getServerSideProps(context) {
-  const session = await getSession(context);
+export async function getServerSideProps({ req, res }) {
+  const session = await getServerSession(req, res, authOptions);
 
   if (session) {
     return {

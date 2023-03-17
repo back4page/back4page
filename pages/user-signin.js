@@ -3,7 +3,6 @@ import { TextField } from "../components/common/InputField";
 import { FaAt, FaLock } from "react-icons/fa";
 import Link from "next/link";
 import useLogin from "../hooks/useLogin";
-// import { getSession } from "next-auth/react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]";
 import Image from "next/image";
@@ -106,11 +105,6 @@ function UserSigninPage() {
 }
 
 export async function getServerSideProps({ req, res }) {
-  // const session = await getSession(context);
-  // const session = await unstable_getServerSession(context.req, context.res);
-
-  // console.log("session is", session);
-
   const session = await getServerSession(req, res, authOptions);
 
   if (session) {

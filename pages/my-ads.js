@@ -1,9 +1,8 @@
-import { getSession } from "next-auth/react";
-import React from "react";
-import Layout from "../components/Layout";
+import { getServerSession } from "next-auth";
 import Table from "../components/Table";
 import { adsColumn } from "../components/Table/columns/adsColumn";
 import { API_URL } from "../config";
+import { authOptions } from "./api/auth/[...nextauth]";
 
 function MyAdsPage({ data }) {
   // console.log("fetched", fetchedData);
@@ -55,22 +54,21 @@ function MyAdsPage({ data }) {
   );
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps({ req, res }) {
   const {
     user: { token, id },
-  } = await getSession(context);
-  // console.log(token, id);
+  } = await getServerSession(req, res, authOptions);
 
   const url = `${API_URL}/posts/get/${id}`;
 
-  const res = await fetch(url, {
+  const response = await fetch(url, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
   });
 
-  const data = await res.json();
+  const data = await response.json();
 
   // console.log(data);
 

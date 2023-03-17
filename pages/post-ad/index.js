@@ -1,7 +1,5 @@
 import Link from "next/link";
-import Layout from "../../components/Layout";
-import { getSession } from "next-auth/react";
-import { redirectPage } from "../../utils/redirectPage";
+// import { redirectPage } from "../../utils/redirectPage";
 // import { countriesData } from "../../components/data/countriesData";
 
 function PostAnAdPage() {
