@@ -68,7 +68,8 @@ function MultiLocationAd({ formTitle, services }) {
   const { postData } = usePostData("/post/add/multiple");
 
   const handleSubmit = (values, formik) => {
-    postData(values, formik);
+    const redirect = "/post-ad/preview";
+    postData(values, formik, redirect);
     // console.log(values);
   };
 

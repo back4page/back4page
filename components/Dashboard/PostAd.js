@@ -59,7 +59,8 @@ function PostAd({ formTitle, services }) {
   const { postData } = usePostData("/post/add/ad");
 
   const handleSubmit = (values, formik) => {
-    postData(values, formik);
+    const redirect = "/post-ad/preview";
+    postData(values, formik, redirect);
   };
 
   const sponsoredAdOptions = [
