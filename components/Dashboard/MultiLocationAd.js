@@ -23,7 +23,7 @@ import usePostData from "../../hooks/usePostData";
 import MySelect from "../common/MySelect";
 import Select from "react-select";
 
-function MultiLocationAd({ formTitle, services }) {
+function MultiLocationAd({ formTitle, services, ad }) {
   const [locationArray, setLocationArray] = useState([]);
   const [changeColor, setChangeColor] = useState(false);
 
@@ -40,21 +40,21 @@ function MultiLocationAd({ formTitle, services }) {
   const initialvalues = {
     // location: locationArray,
     tag: "multiple",
-    country: "",
-    state: "",
-    city: "",
-    service: "",
-    category: "",
-    title: "",
-    description: "",
-    email: "",
-    phone: "",
-    age: "",
-    highlight_ad: "",
-    blink_ad: "",
-    sponsored_ad: "",
-    images: [],
-    total_bill: "",
+    country: ad?.country || "",
+    state: ad?.state || "",
+    city: ad?.city || "",
+    service: ad?.service || "",
+    category: ad?.category || "",
+    title: ad?.title || "",
+    description: ad?.description || "",
+    email: ad?.email || "",
+    phone: ad?.phone || "",
+    age: ad?.age || "",
+    highlight_ad: ad?.highlight_ad || "",
+    blink_ad: ad?.blink_ad || "",
+    sponsored_ad: ad?.sponsored_ad || "",
+    images: ad?.images || [],
+    total_bill: ad?.total_bill || "",
   };
 
   const handleCityChange = (selected) => {
@@ -69,7 +69,7 @@ function MultiLocationAd({ formTitle, services }) {
 
   const handleSubmit = (values, formik) => {
     const redirect = "/post-ad/preview";
-    postData(values, formik, redirect);
+    !ad ? postData(values, formik, redirect) : console.log("edit", values);
     // console.log(values);
   };
 
@@ -294,7 +294,7 @@ function MultiLocationAd({ formTitle, services }) {
                     </div>
 
                     <div className="col-span-2">
-                      <ImageUpload />
+                      <ImageUpload images={ad?.images} />
                     </div>
                   </div>
 

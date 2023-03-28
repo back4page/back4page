@@ -23,7 +23,7 @@ import ImageUpload from "./ImageUpload";
 import usePostData from "../../hooks/usePostData";
 import { useRouter } from "next/router";
 
-function FreeAd({ formTitle, services }) {
+function FreeAd({ formTitle, services, ad }) {
   const [locationArray, setLocationArray] = useState([]);
   const [changeColor, setChangeColor] = useState(false);
 
@@ -44,17 +44,17 @@ function FreeAd({ formTitle, services }) {
   const initialvalues = {
     // location: locationArray,
     tag: "free",
-    country: "",
-    state: "",
-    city: "",
-    service: "",
-    category: "",
-    title: "",
-    description: "",
-    email: "",
-    phone: "",
-    age: "",
-    images: [],
+    country: ad?.country || "",
+    state: ad?.state || "",
+    city: ad?.city || "",
+    service: ad?.service || "",
+    category: ad?.category || "",
+    title: ad?.title || "",
+    description: ad?.description || "",
+    email: ad?.email || "",
+    phone: ad?.phone || "",
+    age: ad?.age || "",
+    images: ad?.images || [],
   };
 
   // const handleSubmit = (values, formik) => {
@@ -66,8 +66,8 @@ function FreeAd({ formTitle, services }) {
   const { postData } = usePostData("/post/add/free");
 
   const handleSubmit = (values, formik) => {
-    const redirect = "/post-ad/preview";
-    postData(values, formik, redirect);
+    const redirect = "post-ad/preview";
+    !ad ? postData(values, formik, redirect) : console.log("edit", values);
 
     // router.push("/post-ad/preview");
   };
@@ -220,7 +220,7 @@ function FreeAd({ formTitle, services }) {
                     </div>
 
                     <div className="col-span-2">
-                      <ImageUpload />
+                      <ImageUpload images={ad?.images} />
                     </div>
                   </div>
 

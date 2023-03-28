@@ -2,7 +2,7 @@ import Image from "next/image";
 
 function SingleAd({ post }) {
   return (
-    <div className="">
+    <div className="mt-5">
       <h1 className="text-4xl">{post?.title}</h1>
       {/* <h1 className="text-4xl">Ad Title</h1> */}
 

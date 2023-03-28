@@ -1,4 +1,5 @@
 import Link from "next/link";
+import DeleteAd from "../../Action/DeleteAd";
 
 export const adsColumn = [
   {
@@ -13,21 +14,7 @@ export const adsColumn = [
         ) : (
           <span className="bg-blue-600 px-3 py-0.5 rounded text-sm">Live</span>
         )}
-        {/* <span
-          className={`px-3 py-1 ${
-            row.original.preview ? "bg-blue-600" : "bg-green-600"
-          }}`}
-        >
-          {row.original.preview ? "Draft" : "Live"}
-        </span> */}
       </div>
-      // <span
-      //   className={`px-3 py-1 ${
-      //     row.original.preview ? "bg-blue-600" : "bg-green-600"
-      //   }}`}
-      // >
-      //   {row.original.preview ? "Draft" : "Live"}
-      // </span>
     ),
   },
   {
@@ -65,25 +52,44 @@ export const adsColumn = [
     Cell: ({ row }) => (
       <div className="flex justify-center items-center gap-2">
         <div className="">
-          <Link href={`/edit-ad/${row.original.id}`}>
-            <button className="bg-yellow-600 text-xs text-white font-semibold px-2 py-1 rounded">
-              Edit
-            </button>
+          <Link
+            href={`/edit-ad/${row.original.tag}?postId=${row.original.id}`}
+            passHref
+          >
+            <a>
+              <button className="bg-yellow-600 text-xs text-white font-semibold px-2 py-1 rounded">
+                Edit
+              </button>
+            </a>
           </Link>
         </div>
         <div className="">
-          <Link href={`/posters/details/${row.original.id}`}>
-            <button className="bg-green-600 text-xs text-white font-semibold px-2 py-1 rounded">
-              View
-            </button>
-          </Link>
+          {row.original.preview ? (
+            <Link href={`/post-ad/preview/${row.original.id}`} passHref>
+              <a>
+                <button className="bg-green-600 text-xs text-white font-semibold px-2 py-1 rounded">
+                  View
+                </button>
+              </a>
+            </Link>
+          ) : (
+            <Link href={`/ad/${row.original.id}`} passHref>
+              <a>
+                <button className="bg-green-600 text-xs text-white font-semibold px-2 py-1 rounded">
+                  View
+                </button>
+              </a>
+            </Link>
+          )}
         </div>
 
-        <div className="">
+        {/* <div className="">
           <button className="bg-red-600 text-xs text-white font-semibold px-2 py-1 rounded">
             Delete
           </button>
-        </div>
+        </div> */}
+
+        <DeleteAd adInfo={row.original} />
 
         {/* <DeletePost posterInfo={row.original} /> */}
       </div>

@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import React, { useState } from "react";
 
 function LayoutPostAd({ step, children }) {
   const steps = [
@@ -24,7 +23,7 @@ function LayoutPostAd({ step, children }) {
   const router = useRouter();
 
   return (
-    <div>
+    <div className="py-10 lg:px-[100px]">
       <h4 className="mt-3 text-2xl font-bold">{step}</h4>
       <div className="mt-5 flex flex-col lg:flex-row items-center gap-5">
         {steps.map((step, i) => (

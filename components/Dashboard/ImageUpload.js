@@ -4,8 +4,8 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { FaTimes } from "react-icons/fa";
 
-function ImageUpload() {
-  const [imageUrl, setImageUrl] = useState([]);
+function ImageUpload({ images }) {
+  const [imageUrl, setImageUrl] = useState(images || []);
   const [imagesPreview, setImagesPreview] = useState([]);
   const [imageEvent, setImageEvent] = useState("");
 
@@ -137,6 +137,17 @@ function ImageUpload() {
             </span> */}
           </div>
         ))}
+        {/* {images?.map((image, i) => (
+          <div key={i} className="relative">
+            <Image
+              alt="image"
+              className="p-2"
+              src={image}
+              width={100}
+              height={100}
+            />
+          </div>
+        ))} */}
       </div>
 
       {/* <div className="mt-3 flex gap-2">
