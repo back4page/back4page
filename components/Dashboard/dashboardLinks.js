@@ -54,11 +54,11 @@ export const dashboardLinks2 = [
     link: "/buy-credit",
     icon: <FaDollarSign />,
   },
-  {
-    name: "Buy Credit",
-    link: "/buy-credit",
-    icon: <BsCurrencyBitcoin />,
-  },
+  // {
+  //   name: "Buy Credit",
+  //   link: "/buy-credit",
+  //   icon: <BsCurrencyBitcoin />,
+  // },
 
   {
     name: "Premium",
