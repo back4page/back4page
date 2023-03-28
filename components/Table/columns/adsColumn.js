@@ -3,7 +3,32 @@ import Link from "next/link";
 export const adsColumn = [
   {
     Header: "status",
-    accessor: "status",
+    accessor: "preview",
+    Cell: ({ row }) => (
+      <div className="flex justify-center">
+        {row.original.preview ? (
+          <span className="bg-green-600 px-3 py-0.5 rounded text-sm">
+            Draft
+          </span>
+        ) : (
+          <span className="bg-blue-600 px-3 py-0.5 rounded text-sm">Live</span>
+        )}
+        {/* <span
+          className={`px-3 py-1 ${
+            row.original.preview ? "bg-blue-600" : "bg-green-600"
+          }}`}
+        >
+          {row.original.preview ? "Draft" : "Live"}
+        </span> */}
+      </div>
+      // <span
+      //   className={`px-3 py-1 ${
+      //     row.original.preview ? "bg-blue-600" : "bg-green-600"
+      //   }}`}
+      // >
+      //   {row.original.preview ? "Draft" : "Live"}
+      // </span>
+    ),
   },
   {
     Header: "title",
