@@ -2,8 +2,13 @@ import { API_URL } from "../config";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 function usePostData(path) {
+  const router = useRouter();
+  const [fetchedData, setFetchedData] = useState("");
+
   const { data } = useSession();
   const { token, id } = data ? data.user : "";
 
@@ -17,7 +22,7 @@ function usePostData(path) {
 
   // const url = `https://boiling-dusk-89135.herokuapp.com/v1/post/add/free/${data?.id}`;
 
-  const postData = async (values, formik) => {
+  const postData = async (values, formik, redirect) => {
     // console.log(values);
     // return;
 
@@ -34,9 +39,11 @@ function usePostData(path) {
     const data = await res.json();
 
     if (res.ok) {
-      console.log("success", data);
-      toast.success("Submitted Successfully");
+      console.log("preview", data);
+      // setFetchedData(data.)
+      !redirect && toast.success("Submitted Successfully");
       // formik.resetForm();
+      redirect && router.push(`/${redirect}/${data.post.id}`);
     } else {
       console.log("error", data);
       toast.error("Something Went Wrong");

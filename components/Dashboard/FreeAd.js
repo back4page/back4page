@@ -21,10 +21,13 @@ import { countriesData } from "../data/countriesData";
 import Image from "next/image";
 import ImageUpload from "./ImageUpload";
 import usePostData from "../../hooks/usePostData";
+import { useRouter } from "next/router";
 
 function FreeAd({ formTitle, services }) {
   const [locationArray, setLocationArray] = useState([]);
   const [changeColor, setChangeColor] = useState(false);
+
+  const router = useRouter();
 
   // const formikRef = useRef();
 
@@ -63,7 +66,10 @@ function FreeAd({ formTitle, services }) {
   const { postData } = usePostData("/post/add/free");
 
   const handleSubmit = (values, formik) => {
-    postData(values, formik);
+    const redirect = "/post-ad/preview";
+    postData(values, formik, redirect);
+
+    // router.push("/post-ad/preview");
   };
 
   const serviceOptions = services.map((category) => category?.name);
@@ -141,6 +147,7 @@ function FreeAd({ formTitle, services }) {
                     name="country"
                     type="text"
                     options={countriesSelect}
+                    required
                   />
                   <SelectField
                     label="State"
@@ -148,6 +155,7 @@ function FreeAd({ formTitle, services }) {
                     name="state"
                     type="text"
                     options={statesSelect(formik.values)}
+                    required
                   />
                   <SelectField
                     label="City"
@@ -155,6 +163,7 @@ function FreeAd({ formTitle, services }) {
                     name="city"
                     type="text"
                     options={citySelect(formik.values)}
+                    required
                   />
                   <SelectField
                     label="Service:"
@@ -162,6 +171,7 @@ function FreeAd({ formTitle, services }) {
                     name="service"
                     type="text"
                     options={serviceOptions}
+                    required
                   />
                   <SelectField
                     label="Category:"
@@ -169,17 +179,20 @@ function FreeAd({ formTitle, services }) {
                     name="category"
                     type="text"
                     options={categoryOptions(formik.values.service)}
+                    required
                   />
                   <TextField
                     label="Ad Title"
                     name="title"
                     type="text"
                     icon={<FaAlignLeft />}
+                    required
                   />
                   <TextArea2
                     label="Unique description"
                     name="description"
                     type="text"
+                    required
                   />
                   <TextField
                     label="Email"

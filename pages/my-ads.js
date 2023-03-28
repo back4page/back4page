@@ -5,7 +5,7 @@ import { API_URL } from "../config";
 import { authOptions } from "./api/auth/[...nextauth]";
 
 function MyAdsPage({ data }) {
-  // console.log("fetched", fetchedData);
+  // console.log("fetched ads", data);
   const posts = data?.success;
 
   // const posts = [
@@ -19,6 +19,8 @@ function MyAdsPage({ data }) {
   //     title: "title 3",
   //   },
   // ];
+
+  console.log("dashboard", posts);
 
   return (
     <>

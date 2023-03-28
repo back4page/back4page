@@ -2,25 +2,27 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { FaExclamationTriangle } from "react-icons/fa";
+import SingleAd from "../../../../components/SIngleAd";
+import AdBanner from "../../../../components/SIngleAd/AdBanner";
 import { API_URL } from "../../../../config";
 import Model from "../../../../public/images/models/model4.webp";
 
 const images = [Model, Model, Model, Model];
 
 function SinglePost({ post }) {
+  console.log("single ad", post);
   return (
     <div className="flex flex-col items-center py-10 lg:px-[100px]">
-      <h1 className="text-4xl">{post?.title}</h1>
-      {/* <h1 className="text-4xl">Ad Title</h1> */}
+      <SingleAd post={post} />
+
+      <AdBanner />
+      {/* <h1 className="text-4xl">{post?.title}</h1>
+     
 
       <div className="mt-4 py-4 border-t border-gray-800/50">
         <p className="">
           {post?.description}
-          {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere libero
-          dolorem omnis? Facilis enim sapiente laborum nam voluptatibus quia,
-          aliquam ipsam, ea distinctio soluta tenetur, nemo ab impedit mollitia
-          deleniti quo commodi asperiores tempora voluptatem saepe quaerat. Sit,
-          impedit dolor. */}
+          
         </p>
 
         <div className="py-5 grid grid-cols-1 lg:grid-cols-3 gap-5 place-items-center">
@@ -38,16 +40,12 @@ function SinglePost({ post }) {
           <div className="flex items-center gap-2">
             <p className="font-bold">Email:</p>
             <p className="">{post.email}</p>
-            {/* <button className="button font-normal text-black px-5 py-2 rounded">
-              Get Contact Email
-            </button> */}
+           
           </div>
           <div className="flex items-center gap-2">
             <p className="font-bold">Contact Number:</p>
             <p className="">{post.phone}</p>
-            {/* <button className="button font-normal text-black px-5 py-2 rounded">
-              Get Contact Number
-            </button> */}
+            
           </div>
           <div className="flex items-center gap-2">
             <p className="font-bold">Age:</p>
@@ -79,7 +77,7 @@ function SinglePost({ post }) {
             </Link>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

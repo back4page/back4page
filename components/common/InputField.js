@@ -252,7 +252,13 @@ export const TextArea2 = ({ label, name, ...props }) => {
   );
 };
 
-export const SelectField = ({ label, name, placeholder, options }) => {
+export const SelectField = ({
+  label,
+  name,
+  placeholder,
+  options,
+  required,
+}) => {
   return (
     <div className="grid grid-cols-3 mb-[18px]">
       <label htmlFor={name} className="col-span-1 pr-6 lg:pr-[10px]">
@@ -264,7 +270,7 @@ export const SelectField = ({ label, name, placeholder, options }) => {
             as="select"
             name={name}
             id={name}
-            // required
+            required={required}
             className="bg-white font-normal text-black px-3 py-[6px] w-full outline-none focus:ring-[3px] focus:transition focus:duration-200 ring-blue-400/50 rounded"
           >
             <option

@@ -95,6 +95,13 @@ function CategoryPage({ data, categoryName, cityName, city, category }) {
   return (
     <>
       <div className="h-[770px]">
+        <div className="my-2 flex items-center gap-2 capitalize font-medium text-sm">
+          <span className="hover:underline">
+            <Link href={`/${city}`}>{cityName}</Link>
+          </span>
+          <span className="">{">"}</span>
+          <p className="">{categoryName}</p>
+        </div>
         <h1 className="text-[32px] font-semibold">
           <span className="capitalize">{categoryName}</span> in{" "}
           <span className="capitalize">{cityName}</span>

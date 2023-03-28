@@ -6,7 +6,8 @@ class MyDocument extends Document {
       <Html lang="en">
         <Head>
           {/* <link rel="shortcut icon" href="/favicon.png" /> */}
-          <link rel="shortcut icon" href="/favicon.jpg" />
+          {/* <link rel="shortcut icon" href="/favicon.jpg" /> */}
+          <link rel="shortcut icon" href="/images/back4page-logo3.jpg" />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link
             rel="preconnect"

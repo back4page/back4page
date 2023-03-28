@@ -43,7 +43,7 @@ function Header() {
             <a href="">
               <div className="mt-1 relative w-[120px] h-[60px]">
                 <Image
-                  src="/images/back4page-logo2.jpg"
+                  src="/images/back4page-logo3.jpg"
                   alt="back4page logo"
                   // width={176}
                   // height={60}
