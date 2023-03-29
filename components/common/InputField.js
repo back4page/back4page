@@ -428,23 +428,28 @@ export const MultiSelectField = ({ previousCities }) => {
     setFieldValue("city", values);
   };
 
+  const defaultCities =
+    previousCities &&
+    Array(previousCities).map((city) => {
+      return {
+        value: city,
+        label: city,
+      };
+    });
+
   // const defaultCities =
   //   previousCities &&
-  //   Array(previousCities).map((city) => {
+  //   previousCities.map((city) => {
   //     return {
   //       value: city,
   //       label: city,
   //     };
   //   });
 
-  const defaultCities =
-    previousCities &&
-    previousCities.map((city) => {
-      return {
-        value: city,
-        label: city,
-      };
-    });
+  // const defaultCity = previousCities && {
+  //   value: previousCities,
+  //   label: previousCities,
+  // };
 
   return (
     <Select
@@ -452,6 +457,7 @@ export const MultiSelectField = ({ previousCities }) => {
       options={citiesOptions}
       onChange={handleCityChange}
       defaultValue={defaultCities}
+      // defaultValue={defaultCity}
       instanceId="react-select-multi"
     />
   );
