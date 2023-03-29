@@ -22,7 +22,7 @@ import Image from "next/image";
 import ImageUpload from "./ImageUpload";
 import usePostData from "../../hooks/usePostData";
 import { useRouter } from "next/router";
-import useEditData from "../../hooks/useEDitData";
+import useEditData from "../../hooks/useEditData";
 
 function FreeAd({ formTitle, services, ad }) {
   const [locationArray, setLocationArray] = useState([]);

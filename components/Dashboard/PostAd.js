@@ -19,7 +19,7 @@ import { useEffect, useState } from "react";
 import { countriesData } from "../data/countriesData";
 import ImageUpload from "./ImageUpload";
 import usePostData from "../../hooks/usePostData";
-import useEditData from "../../hooks/useEDitData";
+import useEditData from "../../hooks/useEditData";
 
 function PostAd({ formTitle, services, ad }) {
   const [locationArray, setLocationArray] = useState([]);

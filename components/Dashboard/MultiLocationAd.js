@@ -23,7 +23,7 @@ import ImageUpload from "./ImageUpload";
 import usePostData from "../../hooks/usePostData";
 import MySelect from "../common/MySelect";
 import Select from "react-select";
-import useEditData from "../../hooks/useEDitData";
+import useEditData from "../../hooks/useEditData";
 
 function MultiLocationAd({ formTitle, services, ad }) {
   const [locationArray, setLocationArray] = useState([]);
