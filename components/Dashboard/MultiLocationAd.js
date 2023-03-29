@@ -14,6 +14,7 @@ import {
   CheckboxField,
   FileField,
   TestMulti,
+  MultiSelectField,
 } from "../common/InputField";
 import Location from "./Location";
 import { useEffect, useState } from "react";
@@ -22,6 +23,7 @@ import ImageUpload from "./ImageUpload";
 import usePostData from "../../hooks/usePostData";
 import MySelect from "../common/MySelect";
 import Select from "react-select";
+import useEditData from "../../hooks/useEDitData";
 
 function MultiLocationAd({ formTitle, services, ad }) {
   const [locationArray, setLocationArray] = useState([]);
@@ -65,12 +67,14 @@ function MultiLocationAd({ formTitle, services, ad }) {
   //   console.log(values);
   // };
 
-  const { postData } = usePostData("/post/add/multiple");
+  const { postData } = usePostData("multiple");
+
+  const postId = ad?.id;
+  const { editData } = useEditData(postId);
 
   const handleSubmit = (values, formik) => {
-    const redirect = "post-ad/preview";
-    !ad ? postData(values, formik, redirect) : console.log("edit", values);
-    // console.log(values);
+    const redirect = "/post-ad/preview";
+    !ad ? postData(values, formik, redirect) : editData(values, formik);
   };
 
   const sponsoredAdOptions = [
@@ -174,10 +178,17 @@ function MultiLocationAd({ formTitle, services, ad }) {
                     </label>
                     <div className="col-span-2 text-black font-normal">
                       {/* <Select options={citiesOptions} /> */}
-                      <TestMulti
+                      {/* <TestMulti
                         cityValue={cityValue}
                         handleCityChange={handleCityChange}
+                        cityFromBackend={ad?.city}
+                      /> */}
+                      <MultiSelectField
+                        cityValue={cityValue}
+                        handleCityChange={handleCityChange}
+                        previousCities={ad?.city}
                       />
+
                       {/* <MySelect
                         isMulti
                         options={citiesOptions}

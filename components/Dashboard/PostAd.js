@@ -19,6 +19,7 @@ import { useEffect, useState } from "react";
 import { countriesData } from "../data/countriesData";
 import ImageUpload from "./ImageUpload";
 import usePostData from "../../hooks/usePostData";
+import useEditData from "../../hooks/useEDitData";
 
 function PostAd({ formTitle, services, ad }) {
   const [locationArray, setLocationArray] = useState([]);
@@ -56,11 +57,14 @@ function PostAd({ formTitle, services, ad }) {
   //   console.log(values);
   // };
 
-  const { postData } = usePostData("/post/add/ad");
+  const { postData } = usePostData("ad");
+
+  const postId = ad?.id;
+  const { editData } = useEditData(postId);
 
   const handleSubmit = (values, formik) => {
     const redirect = "/post-ad/preview";
-    !ad ? postData(values, formik, redirect) : console.log("edit", values);
+    !ad ? postData(values, formik, redirect) : editData(values, formik);
   };
 
   const sponsoredAdOptions = [

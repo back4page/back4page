@@ -5,14 +5,14 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
-function usePostData(path) {
+function usePostData(category) {
   const router = useRouter();
   const [fetchedData, setFetchedData] = useState("");
 
   const { data } = useSession();
   const { token, id } = data ? data.user : "";
 
-  const url = `${API_URL}${path}/${id}`;
+  const url = `${API_URL}/post/add/${category}/${id}`;
 
   // useEffect(() => {
   //   console.log(`${API_URL}${path}/${id}`);

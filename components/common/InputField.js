@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { FaTimes } from "react-icons/fa";
 import { countriesData } from "../data/countriesData";
 import MySelect from "./MySelect";
+import Select from "react-select";
 
 export const FileField = ({
   label,
@@ -391,9 +392,9 @@ export const CheckboxField = ({ label, name, placeholder, option }) => {
   );
 };
 
-export const TestMulti = ({ cityValue }) => {
+export const MultiSelectField = ({ previousCities }) => {
   const { values, setFieldValue } = useFormikContext();
-
+  const fakeCities = ["x", "y", "z"];
   const citySelect = () => {
     const { country: countryValue, state: stateValue } = values && values;
 
@@ -408,14 +409,12 @@ export const TestMulti = ({ cityValue }) => {
       (state) => state.name === stateValue
     );
     const cities = citiesValues?.cities?.map((city) => city);
+    // fakeCities && fakeCities.map((city) => cities.unshift(city));
     return cities;
   };
 
   const cities = citySelect();
 
-  // console.log("ccc", cities);
-
-  // const citiesOptions = [{ value: "city", label: "city" }];
   const citiesOptions = cities?.map((city) => {
     return {
       value: city,
@@ -425,40 +424,117 @@ export const TestMulti = ({ cityValue }) => {
 
   const handleCityChange = (selected) => {
     const values = selected?.map((value) => value.value);
-    // console.log("selected", values);
+
     setFieldValue("city", values);
-    // setCityValues(values);
   };
 
-  const defaultValue = () => {
-    return citiesOptions
-      ? citiesOptions?.find((option) => option === values?.city)
-      : "";
-  };
+  // const defaultCities =
+  //   previousCities &&
+  //   Array(previousCities).map((city) => {
+  //     return {
+  //       value: city,
+  //       label: city,
+  //     };
+  //   });
 
-  const x = defaultValue();
-
-  console.log("defaultValue", x);
+  const defaultCities =
+    previousCities &&
+    previousCities.map((city) => {
+      return {
+        value: city,
+        label: city,
+      };
+    });
 
   return (
-    <MySelect
+    <Select
       isMulti
       options={citiesOptions}
-      // value={defaultValue()}
-      // value={values.city}
-      // value={cityValues}
       onChange={handleCityChange}
-      // options={countriesOptions}
-      // options={citiesOptions}
-      // // closeMenuOnSelect={false}
-      // // // instanceId={countriesId}
-      // // hideSelectedOptions={false}
-      // // // components={{ Option, MultiValue }}
-      // // // onChange={handleCountryChange}
-      // onChange={handleCityChange}
-      // // allowSelectAll={true}
-      // // // value={countrySelected}
-      // value={citySelected}
+      defaultValue={defaultCities}
+      instanceId="react-select-multi"
     />
   );
 };
+
+// export const TestMulti = ({ cityValue, previousCities }) => {
+//   const { values, setFieldValue } = useFormikContext();
+//   const fakeCities = ["x", "y", "z"];
+//   const citySelect = () => {
+//     const { country: countryValue, state: stateValue } = values && values;
+
+//     if (!stateValue) {
+//       return ["- - - Select State First - - -"];
+//     }
+//     const countries = countriesData?.find(
+//       (country) => country.name === countryValue
+//     );
+
+//     const citiesValues = countries?.states?.find(
+//       (state) => state.name === stateValue
+//     );
+//     const cities = citiesValues?.cities?.map((city) => city);
+//     // fakeCities && fakeCities.map((city) => cities.unshift(city));
+//     return cities;
+//   };
+
+//   const cities = citySelect();
+
+//   // console.log("ccc", cities);
+
+//   // const citiesOptions = [{ value: "city", label: "city" }];
+
+//   const citiesOptions = cities?.map((city) => {
+//     return {
+//       value: city,
+//       label: city,
+//     };
+//   });
+
+//   // const citiesOptions = cities?.map((city) => {
+//   //   return {
+//   //     value: city,
+//   //     label: city,
+//   //   };
+//   // });
+
+//   const handleCityChange = (selected) => {
+//     const values = selected?.map((value) => value.value);
+//     // console.log("selected", values);
+//     setFieldValue("city", values);
+//     // setCityValues(values);
+//   };
+
+//   // const defaultValue = () => {
+//   //   return citiesOptions
+//   //     ? citiesOptions?.find((option) => option === values?.city)
+//   //     : "";
+//   // };
+
+//   // const x = defaultValue();
+
+//   return (
+//     <MySelect
+//       isMulti
+//       options={citiesOptions}
+//       // value={defaultValue()}
+//       // value={values.city}
+//       // value={cityValues}
+//       onChange={handleCityChange}
+//       previousCities={previousCities}
+//       fakeCities={fakeCities}
+//       // defaultValue={["z", "x", "y"]}
+//       // options={countriesOptions}
+//       // options={citiesOptions}
+//       // // closeMenuOnSelect={false}
+//       // // // instanceId={countriesId}
+//       // // hideSelectedOptions={false}
+//       // // // components={{ Option, MultiValue }}
+//       // // // onChange={handleCountryChange}
+//       // onChange={handleCityChange}
+//       // // allowSelectAll={true}
+//       // // // value={countrySelected}
+//       // value={citySelected}
+//     />
+//   );
+// };

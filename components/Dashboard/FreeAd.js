@@ -22,6 +22,7 @@ import Image from "next/image";
 import ImageUpload from "./ImageUpload";
 import usePostData from "../../hooks/usePostData";
 import { useRouter } from "next/router";
+import useEditData from "../../hooks/useEDitData";
 
 function FreeAd({ formTitle, services, ad }) {
   const [locationArray, setLocationArray] = useState([]);
@@ -63,11 +64,14 @@ function FreeAd({ formTitle, services, ad }) {
   //   console.log(values);
   // };
 
-  const { postData } = usePostData("/post/add/free");
+  const { postData } = usePostData("free");
+
+  const postId = ad?.id;
+  const { editData } = useEditData(postId);
 
   const handleSubmit = (values, formik) => {
     const redirect = "post-ad/preview";
-    !ad ? postData(values, formik, redirect) : console.log("edit", values);
+    !ad ? postData(values, formik, redirect) : editData(values, formik);
 
     // router.push("/post-ad/preview");
   };
