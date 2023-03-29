@@ -71,6 +71,8 @@ function FreeAd({ formTitle, services, ad }) {
 
   const handleSubmit = (values, formik) => {
     const redirect = "post-ad/preview";
+    // const preview = ad?.preview;
+
     !ad ? postData(values, formik, redirect) : editData(values, formik);
 
     // router.push("/post-ad/preview");

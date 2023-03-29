@@ -35,8 +35,14 @@ function useEditData(postId) {
       // setFetchedData(data.)
       toast.success("Ad Edited Successfully");
       // formik.resetForm();
-      // router.push(`/ad/${data.post.id}`);
+      // isLive === true
+      //   ? router.push(`/ad/${postId}`)
+      //   : router.push(`/post-ad/preview/${postId}`);
+
       router.push(`/ad/${postId}`);
+
+      // isLive === true && router.push(`/ad/${postId}`);
+      // isLive === false && router.push(`/post-ad/preview/${postId}`);
     } else {
       console.log("error", data);
       toast.error("Something Went Wrong");
