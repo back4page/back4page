@@ -23,7 +23,8 @@ export async function getServerSideProps({ req, res }) {
     user: { token, id },
   } = await getServerSession(req, res, authOptions);
 
-  const url = `${API_URL}/posts/get/${id}`;
+  // const url = `${API_URL}/posts/get/${id}`;
+  const url = `${API_URL}/post/multiple/data/${id}}`;
 
   const response = await fetch(url, {
     headers: {

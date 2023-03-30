@@ -23,6 +23,7 @@ import ImageUpload from "./ImageUpload";
 import usePostData from "../../hooks/usePostData";
 import { useRouter } from "next/router";
 import useEditData from "../../hooks/useEditData";
+import ImageField from "../common/ImageField";
 
 function FreeAd({ formTitle, services, ad }) {
   const [locationArray, setLocationArray] = useState([]);
@@ -41,6 +42,8 @@ function FreeAd({ formTitle, services, ad }) {
 
   //   return () => clearInterval(interval);
   // });
+
+  const [imageFiles, setImageFiles] = useState([]);
 
   const initialvalues = {
     // location: locationArray,
@@ -218,6 +221,23 @@ function FreeAd({ formTitle, services, ad }) {
                     type="number"
                     icon={<FaHashtag />}
                   />
+
+                  {/* <div className="grid grid-cols-3 mb-[18px]">
+                    <div className="">
+                      <label htmlFor="images">Images </label>
+                      <p className="text-xs">(Maximum 4 images)</p>
+                    </div>
+
+                    <div className="col-span-2">
+                      <ImageField
+                        label="Upload Images"
+                        name="images"
+                        imageFiles={imageFiles}
+                        setImageFiles={setImageFiles}
+                        required
+                      />
+                    </div>
+                  </div> */}
 
                   <div className="grid grid-cols-3 mb-[18px]">
                     <div className="">
