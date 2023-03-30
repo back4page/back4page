@@ -4,7 +4,7 @@ import { API_URL } from "../../config";
 
 function EditFreeAd({ ad }) {
   console.log("ad", ad);
-  const formTitle = `Edit "${ad.title}"`;
+  const formTitle = `Edit "${ad?.title}"`;
 
   const selectedServices = [
     "Automotive",

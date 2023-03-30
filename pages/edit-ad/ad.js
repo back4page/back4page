@@ -4,7 +4,7 @@ import { servicesData } from "../../components/data/servicesData";
 import { API_URL } from "../../config";
 
 function EditPaidAd({ ad }) {
-  const formTitle = `Edit "${ad.title}"`;
+  const formTitle = `Edit "${ad?.title}"`;
 
   const selectedServices = [
     "Adult",

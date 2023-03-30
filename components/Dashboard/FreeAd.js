@@ -73,12 +73,37 @@ function FreeAd({ formTitle, services, ad }) {
   const { editData } = useEditData(postId);
 
   const handleSubmit = (values, formik) => {
+    // let formData = new FormData();
+    // Array.from(imageFiles.file).forEach((file) => {
+    //   formData.append("file", file);
+    //   formData.append("upload_preset", "msz5dddv");
+
+    //   const upload = async () => {
+    //     const res = await fetch(
+    //       "https://api.cloudinary.com/v1_1/ddxy1wdgy/image/upload",
+    //       {
+    //         method: "POST",
+    //         body: formData,
+    //       }
+    //     );
+
+    //     const data = await res.json();
+
+    //     if (res.ok) {
+    //       console.log("success", data);
+    //       // setImageUrl((prev) => [...prev, data.secure_url]);
+    //       formik.setFieldvalue("images", data.secure_url);
+    //       console.log("values", formik.values);
+    //     } else {
+    //       console.log("failed", data);
+    //     }
+    //   };
+
+    //   upload();
+    // });
+
     const redirect = "post-ad/preview/single";
-    // const preview = ad?.preview;
-
     !ad ? postData(values, formik, redirect) : editData(values, formik);
-
-    // router.push("/post-ad/preview");
   };
 
   const serviceOptions = services.map((category) => category?.name);

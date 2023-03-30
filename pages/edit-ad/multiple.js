@@ -5,7 +5,7 @@ import { API_URL } from "../../config";
 import { authOptions } from "../api/auth/[...nextauth]";
 
 function EditMultipleLocationAd({ ad }) {
-  const formTitle = `Edit "${ad.title}"`;
+  const formTitle = `Edit "${ad?.title}"`;
 
   console.log("ad", ad);
 

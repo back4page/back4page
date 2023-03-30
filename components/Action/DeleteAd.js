@@ -19,11 +19,18 @@ function DeleteAd({ adInfo, type }) {
   const handleDelete = async () => {
     setDisableDelete(true);
 
-    // console.log("url", `${API_URL}/post/add/delete/${userId}`);
+    const urlByType = () => {
+      if (type === "single-location") {
+        return `${API_URL}/post/add/delete/${userId}`;
+      }
+      if (type === "multiple-location") {
+        return `${API_URL}/post/multiple/delete/${userId}`;
+      }
+    };
 
-    // return;
+    const url = urlByType();
 
-    const res = await fetch(`${API_URL}/post/add/delete/${userId}`, {
+    const res = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -38,13 +45,9 @@ function DeleteAd({ adInfo, type }) {
       console.log("success", data);
       toast.success(`Ad ${adInfo.title} Deleted`);
       router.replace(`/my-ads/${type}`);
-      // setShowDeleteModal(false);
-      // setDisableDelete(false);
     } else {
       console.log("error", data);
       toast.success("Something went wrong");
-      // setShowDeleteModal(false);
-      // setDisableDelete(false);
     }
 
     setShowDeleteModal(false);
