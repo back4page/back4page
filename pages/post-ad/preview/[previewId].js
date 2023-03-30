@@ -12,11 +12,11 @@ function PreviewPage({ post }) {
     <div>
       <LayoutPostAd step="Step 2: Preview Ad">
         <SingleAd post={post} />
-        {/* <Link href={`/post-ad/payment?postId=${post.id}`}>
+        <Link href={`/post-ad/payment?postId=${post.id}`}>
           <button className="mt-4 mb-20 bg-yellow-400 text-black font-semibold text-sm px-3 py-1.5 rounded">
             Next Step
           </button>
-        </Link> */}
+        </Link>
       </LayoutPostAd>
     </div>
   );
