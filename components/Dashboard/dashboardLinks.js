@@ -22,7 +22,8 @@ export const dashboardLinks = [
   },
   {
     name: "My Ads",
-    link: "/my-ads",
+    // link: "/my-ads",
+    link: "/my-ads/single-location",
     icon: <FaList />,
   },
 

@@ -62,7 +62,7 @@ export const config = {
     "/buy-credit",
     "/premium",
     "/message-blast",
-    "/my-ads",
+    "/my-ads/:path*",
     // "/post-ad/:path",
   ],
 };
