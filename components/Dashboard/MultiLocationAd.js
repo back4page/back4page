@@ -74,7 +74,8 @@ function MultiLocationAd({ formTitle, services, ad }) {
 
   const handleSubmit = (values, formik) => {
     const redirect = "post-ad/preview/multiple";
-    !ad ? postData(values, formik, redirect) : editData(values, formik);
+    const type = "multiple";
+    !ad ? postData(values, formik, redirect) : editData(values, formik, type);
   };
 
   const sponsoredAdOptions = [

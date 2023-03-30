@@ -64,7 +64,8 @@ function PostAd({ formTitle, services, ad }) {
 
   const handleSubmit = (values, formik) => {
     const redirect = "/post-ad/preview/single";
-    !ad ? postData(values, formik, redirect) : editData(values, formik);
+    const type = "single";
+    !ad ? postData(values, formik, redirect) : editData(values, formik, type);
   };
 
   const sponsoredAdOptions = [

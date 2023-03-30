@@ -24,6 +24,7 @@ import usePostData from "../../hooks/usePostData";
 import { useRouter } from "next/router";
 import useEditData from "../../hooks/useEditData";
 import ImageField from "../common/ImageField";
+import useImageUpload from "../../hooks/useImageUpload";
 
 function FreeAd({ formTitle, services, ad }) {
   const [locationArray, setLocationArray] = useState([]);
@@ -44,6 +45,8 @@ function FreeAd({ formTitle, services, ad }) {
   // });
 
   const [imageFiles, setImageFiles] = useState([]);
+  // const [imageUrl, setImageUrl] = useState(images || []);
+  // const [imageUrl, setImageUrl] = useState(ad?.images || []);
 
   const initialvalues = {
     // location: locationArray,
@@ -72,10 +75,12 @@ function FreeAd({ formTitle, services, ad }) {
   const postId = ad?.id;
   const { editData } = useEditData(postId);
 
+  // const { uploadImage } = useImageUpload(imageFiles);
+
   const handleSubmit = (values, formik) => {
     // let formData = new FormData();
-    // Array.from(imageFiles.file).forEach((file) => {
-    //   formData.append("file", file);
+    // Array.from(imageFiles).forEach((image) => {
+    //   formData.append("file", image.file[1]);
     //   formData.append("upload_preset", "msz5dddv");
 
     //   const upload = async () => {
@@ -91,9 +96,7 @@ function FreeAd({ formTitle, services, ad }) {
 
     //     if (res.ok) {
     //       console.log("success", data);
-    //       // setImageUrl((prev) => [...prev, data.secure_url]);
-    //       formik.setFieldvalue("images", data.secure_url);
-    //       console.log("values", formik.values);
+    //       setImageUrl((prev) => [...prev, data.secure_url]);
     //     } else {
     //       console.log("failed", data);
     //     }
@@ -102,8 +105,11 @@ function FreeAd({ formTitle, services, ad }) {
     //   upload();
     // });
 
+    // uploadImage();
+
     const redirect = "post-ad/preview/single";
-    !ad ? postData(values, formik, redirect) : editData(values, formik);
+    const type = "single";
+    !ad ? postData(values, formik, redirect) : editData(values, formik, type);
   };
 
   const serviceOptions = services.map((category) => category?.name);
@@ -174,7 +180,6 @@ function FreeAd({ formTitle, services, ad }) {
             {(formik) => (
               <Form>
                 <div className="">
-                  {/* <Location setLocationArray={setLocationArray} /> */}
                   <SelectField
                     label="Country"
                     placeholder="Select Country"

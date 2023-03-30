@@ -12,11 +12,24 @@ function useEditData(postId) {
   const { data } = useSession();
   const { token, id } = data ? data.user : "";
 
-  const url = `${API_URL}/post/add/edit/${id}/${postId}`;
-
-  const editData = async (values, formik, redirect) => {
+  const editData = async (values, formik, type) => {
     // console.log(values, url);
     // return;
+
+    const urlByType = () => {
+      if (type === "single") {
+        return `${API_URL}/post/add/edit/${id}/${postId}`;
+      }
+      if (type === "multiple") {
+        return `${API_URL}/post/multiple/edit/${id}/${postId}`;
+      }
+    };
+
+    const url = urlByType();
+
+    console.log("url", url);
+
+    // const url = `${API_URL}/post/add/edit/${id}/${postId}`;
 
     const res = await fetch(url, {
       method: "POST",
@@ -39,7 +52,11 @@ function useEditData(postId) {
       //   ? router.push(`/ad/${postId}`)
       //   : router.push(`/post-ad/preview/${postId}`);
 
-      router.push(`/ad/${postId}`);
+      // /post-ad/preview/multiple
+      // /ad/multiple
+
+      // router.push(`/ad/multiple/${postId}`);
+      router.push(`/post-ad/preview/multiple/${postId}`);
 
       // isLive === true && router.push(`/ad/${postId}`);
       // isLive === false && router.push(`/post-ad/preview/${postId}`);
