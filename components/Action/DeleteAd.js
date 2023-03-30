@@ -5,7 +5,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { API_URL } from "../../config";
 
-function DeleteAd({ adInfo }) {
+function DeleteAd({ adInfo, type }) {
   // `/post/add/delete/${id}`
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [disableDelete, setDisableDelete] = useState(false);
@@ -37,7 +37,7 @@ function DeleteAd({ adInfo }) {
     if (res.ok) {
       console.log("success", data);
       toast.success(`Ad ${adInfo.title} Deleted`);
-      router.replace("/my-ads");
+      router.replace(`/my-ads/${type}`);
       // setShowDeleteModal(false);
       // setDisableDelete(false);
     } else {

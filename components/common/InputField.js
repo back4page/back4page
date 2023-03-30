@@ -428,23 +428,23 @@ export const MultiSelectField = ({ previousCities }) => {
     setFieldValue("city", values);
   };
 
-  const defaultCities =
-    previousCities &&
-    Array(previousCities).map((city) => {
-      return {
-        value: city,
-        label: city,
-      };
-    });
-
   // const defaultCities =
   //   previousCities &&
-  //   previousCities.map((city) => {
+  //   Array(previousCities).map((city) => {
   //     return {
   //       value: city,
   //       label: city,
   //     };
   //   });
+
+  const defaultCities =
+    previousCities &&
+    previousCities.map((city) => {
+      return {
+        value: city,
+        label: city,
+      };
+    });
 
   // const defaultCity = previousCities && {
   //   value: previousCities,

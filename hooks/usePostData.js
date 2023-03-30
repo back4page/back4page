@@ -43,7 +43,8 @@ function usePostData(category) {
       // setFetchedData(data.)
       !redirect && toast.success("Submitted Successfully");
       // formik.resetForm();
-      redirect && router.push(`/${redirect}/${data.post.id}`);
+      redirect && data.id && router.push(`/${redirect}/${data.id}`);
+      redirect && data.post.id && router.push(`/${redirect}/${data.post.id}`);
     } else {
       console.log("error", data);
       toast.error("Something Went Wrong");

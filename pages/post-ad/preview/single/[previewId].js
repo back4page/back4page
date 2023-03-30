@@ -1,9 +1,9 @@
 import { getServerSession } from "next-auth";
 import Link from "next/link";
-import LayoutPostAd from "../../../components/Dashboard/LayoutPostAd";
-import SingleAd from "../../../components/SIngleAd";
-import { API_URL } from "../../../config";
-import { authOptions } from "../../api/auth/[...nextauth]";
+import LayoutPostAd from "../../../../components/Dashboard/LayoutPostAd";
+import SingleAd from "../../../../components/SIngleAd";
+import { API_URL } from "../../../../config";
+import { authOptions } from "../../../api/auth/[...nextauth]";
 
 function PreviewPage({ post }) {
   console.log("preview post", post);

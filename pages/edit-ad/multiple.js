@@ -1,10 +1,13 @@
-import React from "react";
+import { getServerSession } from "next-auth";
 import MultiLocationAd from "../../components/Dashboard/MultiLocationAd";
 import { servicesData } from "../../components/data/servicesData";
 import { API_URL } from "../../config";
+import { authOptions } from "../api/auth/[...nextauth]";
 
 function EditMultipleLocationAd({ ad }) {
   const formTitle = `Edit "${ad.title}"`;
+
+  console.log("ad", ad);
 
   const selectedServices = [
     "Adult",
@@ -27,8 +30,6 @@ function EditMultipleLocationAd({ ad }) {
 
   return (
     <>
-      {/* <OldMultiLocationAd formTitle={formTitle} services={services} /> */}
-      {/* <MultiLocationAd formTitle={formTitle} services={services} /> */}
       <MultiLocationAd formTitle={formTitle} services={services} ad={ad} />
     </>
   );
@@ -36,17 +37,28 @@ function EditMultipleLocationAd({ ad }) {
 
 export default EditMultipleLocationAd;
 
-export async function getServerSideProps({ query: { postId } }) {
-  const url = `${API_URL}/single/post/get/${postId}`;
-  const res = await fetch(url);
+export async function getServerSideProps(context) {
+  const postId = context.query.postId;
+  const session = await getServerSession(context.req, context.res, authOptions);
+  const userId = session.user.id;
+  const token = session.user.token;
+
+  console.log("previewId", postId);
+
+  const url = `${API_URL}/post/multiple/preview/${userId}/${postId}`;
+
+  const res = await fetch(url, {
+    headers: {
+      "Content-type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
   const data = await res.json();
 
-  console.log("data is", data);
-
-  const ad = data?.success;
+  const post = data?.post;
 
   if (res.ok) {
-    return { props: { ad } };
+    return { props: { ad: post } };
   } else {
     return {
       notFound: true,

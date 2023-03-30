@@ -1,7 +1,7 @@
 import Link from "next/link";
 import DeleteAd from "../../Action/DeleteAd";
 
-export const adsColumn = [
+export const adsColumnSingle = [
   {
     Header: "status",
     accessor: "preview",
@@ -65,7 +65,7 @@ export const adsColumn = [
         </div>
         <div className="">
           {row.original.preview ? (
-            <Link href={`/post-ad/preview/${row.original.id}`} passHref>
+            <Link href={`/post-ad/preview/single/${row.original.id}`} passHref>
               <a>
                 <button className="bg-green-600 text-xs text-white font-semibold px-2 py-1 rounded">
                   View
@@ -89,7 +89,7 @@ export const adsColumn = [
           </button>
         </div> */}
 
-        <DeleteAd adInfo={row.original} />
+        <DeleteAd adInfo={row.original} type="single-location" />
 
         {/* <DeletePost posterInfo={row.original} /> */}
       </div>

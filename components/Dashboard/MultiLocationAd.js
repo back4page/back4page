@@ -73,7 +73,7 @@ function MultiLocationAd({ formTitle, services, ad }) {
   const { editData } = useEditData(postId);
 
   const handleSubmit = (values, formik) => {
-    const redirect = "post-ad/preview";
+    const redirect = "post-ad/preview/multiple";
     !ad ? postData(values, formik, redirect) : editData(values, formik);
   };
 

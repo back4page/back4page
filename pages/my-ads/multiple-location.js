@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth";
 import React from "react";
 import Table from "../../components/Table";
-import { adsColumn } from "../../components/Table/columns/adsColumn";
+import { adsColumnMultiple } from "../../components/Table/columns/adsColumnMultiple";
 import Tabs from "../../components/Tabs";
 import { API_URL } from "../../config";
 import { authOptions } from "../api/auth/[...nextauth]";
@@ -10,7 +10,9 @@ function MultipleLocationAd({ posts }) {
   return (
     <Tabs>
       <div className="my-10">
-        {posts && <Table columnsHeading={adsColumn} usersData={posts} />}
+        {posts && (
+          <Table columnsHeading={adsColumnMultiple} usersData={posts} />
+        )}
       </div>
     </Tabs>
   );
