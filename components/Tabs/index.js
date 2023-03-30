@@ -29,7 +29,7 @@ function Tabs({ children }) {
               className={`px-5 lg:px-10 py-2 text-sm lg:text-base font-bold ${
                 router.pathname.includes(tab.link)
                   ? "border-b-2 border-gray-300"
-                  : "border-b-2 border-gray-600 bg-gray-600"
+                  : "border-b-2 border-gray-600 bg-gray-600 opacity-70"
               } `}
             >
               {tab.name}
