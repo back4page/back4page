@@ -106,14 +106,6 @@ function CategoryPage({ data, categoryName, cityName, city, category }) {
           <span className="capitalize">{categoryName}</span> in{" "}
           <span className="capitalize">{cityName}</span>
         </h1>
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Esse
-          reprehenderit assumenda perferendis minima beatae placeat dolorem
-          voluptate! Illo vitae eveniet ratione veniam sit eaque quasi
-          repellendus fuga mollitia, nemo enim aspernatur veritatis esse
-          temporibus? Amet pariatur iure libero, at fugit ratione numquam
-          molestias enim laborum nihil saepe, ducimus recusandae beatae.
-        </p>
 
         <div className="my-5">
           {ads?.map((ad, i) => (

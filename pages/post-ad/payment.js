@@ -38,7 +38,7 @@ function PaymentPage({ postId, userId, token }) {
           className="mt-4 mb-20 bg-yellow-400 text-black font-semibold text-sm px-3 py-1.5 rounded"
           onClick={handlePostAd}
         >
-          Next Step
+          Pay Now
         </button>
         {/* </Link> */}
       </div>

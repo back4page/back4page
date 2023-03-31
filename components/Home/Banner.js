@@ -21,15 +21,21 @@ function Banner({ popularAds, isLoading, isError }) {
       </div> */}
 
       <div className="my-[15px]">
-        <p className="text-center tracking-[7px] font-light text-slate-200">
+        <p className="text-center text-xl font-semibold text-custom-yellow tracking-[7px] ">
           ---- Popular <span className="px-[6px]"></span> Ads ----
         </p>
 
         <div className="mt-4 flex justify-center items-center flex-wrap">
           {isLoading && (
-            <p className="text-xl h-[100px] tracking-widest">Loading...</p>
+            <p className="text-xl h-[100px] text-custom-yellow tracking-widest">
+              Loading...
+            </p>
           )}
-          {isError && <p className="text-xl h-[100px]">Something Went Wrong</p>}
+          {isError && (
+            <p className="text-xl h-[100px] text-red-500">
+              Something Went Wrong
+            </p>
+          )}
           {popularAds &&
             popularAds.map((ad, i) => (
               <Link key={i} href={`/ad/${ad.id}`} passHref>
@@ -48,36 +54,7 @@ function Banner({ popularAds, isLoading, isError }) {
                   </div>
                 </a>
               </Link>
-              // <div
-              //   key={i}
-              //   className="border-2 border-black relative w-[100px] h-[100px]"
-              // >
-              //   <Image
-              //     src={model.image}
-              //     alt={model.name}
-              //     layout="fill"
-              //     priority
-              //     // objectFit="cover"
-              //   />
-              // </div>
             ))}
-
-          {/* <Link href={`/ad/${postId}`} passHref>
-            <a>
-              <div
-                // key={i}
-                className="border-2 border-black relative w-[100px] h-[100px]"
-              >
-                <Image
-                  src={images}
-                  alt={title}
-                  layout="fill"
-                  priority
-                  // objectFit="cover"
-                />
-              </div>
-            </a>
-          </Link> */}
         </div>
       </div>
 
