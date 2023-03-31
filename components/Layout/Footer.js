@@ -16,16 +16,16 @@ function Footer() {
           <Link href="/contact">Contact</Link>
         </p>
         |
-        <p className="cursor-pointer hover:underline">
-          <Link href="/contact">Privacy &amp; Terms</Link>
+        <p className="hover:underline">
+          <Link href="/privacy-and-terms">Privacy &amp; Terms</Link>
         </p>
       </div>
       <div className="flex flex-col lg:flex-row lg:gap-2 justify-center items-center">
         {/* <p className="cursor-pointer hover:underline">
           Alternative to back4page |
         </p> */}
-        <p className="cursor-pointer hover:underline">
-          Website similiar to bedpage
+        <p className="hover:underline">
+          <Link href="/similar-website">Website similar to bedpage</Link>
         </p>
 
         {/* <p className="cursor-pointer hover:underline">
