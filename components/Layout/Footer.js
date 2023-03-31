@@ -25,7 +25,7 @@ function Footer() {
           Alternative to back4page |
         </p> */}
         <p className="hover:underline">
-          <Link href="/similar-website">Website similar to bedpage</Link>
+          <Link href="/similar-website">Website similar to backpage</Link>
         </p>
 
         {/* <p className="cursor-pointer hover:underline">
