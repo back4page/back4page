@@ -2,12 +2,16 @@ import { useFormikContext } from "formik";
 import { useState } from "react";
 import { useEffect } from "react";
 
-function useImageUpload(formik, imageFiles) {
+function useImageUpload(imageFiles, imageUrl, setImageUrl) {
   // const formik = useFormikContext();
-  const [imageUrl, setImageUrl] = useState([]);
+  // const [imageUrl, setImageUrl] = useState([]);
+
+  // useEffect(() => {
+  //   formik.setFieldValue("images", imageUrl);
+  // }, [imageUrl]);
 
   useEffect(() => {
-    formik.setFieldValue("images", imageUrl);
+    console.log("imageUrl", imageUrl);
   }, [imageUrl]);
 
   const uploadImage = async () => {
@@ -30,6 +34,7 @@ function useImageUpload(formik, imageFiles) {
         if (res.ok) {
           console.log("success", data);
           setImageUrl((prev) => [...prev, data.secure_url]);
+          // formik.setFieldValue("images", imageUrl);
         } else {
           console.log("failed", data);
         }
@@ -38,6 +43,7 @@ function useImageUpload(formik, imageFiles) {
       upload();
     });
   };
+
   return { uploadImage };
 }
 

@@ -1,113 +1,126 @@
 import { useFormikContext } from "formik";
 import Image from "next/image";
-import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
-import { useRef } from "react";
+import { useState, useEffect, useRef } from "react";
+import { FaTimes } from "react-icons/fa";
 
-function ImageField({ label, name, imageFiles, setImageFiles, required }) {
+function ImageField({ images }) {
   const formik = useFormikContext();
   const hiddenFileInput = useRef(null);
 
-  // const [imageFiles, setImageFiles] = useState([]);
-  // const [imagePreviews, setImagePreviews] = useState([]);
+  const [imageUrl, setImageUrl] = useState(images || []);
+  const [imageFiles, setImageFiles] = useState([]);
+  const [isMaxedOut, setIsMaxedOut] = useState(false);
 
-  const handleImageChange = (e) => {
-    // setImageFiles(e.target.files);
-    // let ImagesArray = Object.entries(e.target.files).map((e) =>
-    //   URL.createObjectURL(e[1])
-    // );
-    let ImagesArray = Object.entries(e.target.files).map((e) => {
-      return {
-        preview: URL.createObjectURL(e[1]),
-        file: e,
+  useEffect(() => {
+    // console.log(imageUrl);
+    formik.setFieldValue("images", imageUrl);
+    imageUrl.length > 4 && setIsMaxedOut(true);
+  }, [imageUrl]);
+
+  const handleImageChange = async (e) => {
+    if (e.target.files.length > 4) {
+      setIsMaxedOut(true);
+      return;
+    }
+
+    setImageFiles(e.target.files);
+
+    let formData = new FormData();
+    Array.from(e.target.files).forEach((file) => {
+      formData.append("file", file);
+      formData.append("upload_preset", "msz5dddv");
+
+      const upload = async () => {
+        const res = await fetch(
+          "https://api.cloudinary.com/v1_1/ddxy1wdgy/image/upload",
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
+
+        const data = await res.json();
+
+        if (res.ok) {
+          console.log("success", data);
+          setImageUrl((prev) => [...prev, data.secure_url]);
+        } else {
+          console.log("failed", data);
+        }
       };
+
+      upload();
     });
-
-    console.log("imagesArray", ImagesArray);
-
-    setImageFiles([...imageFiles, ...ImagesArray]);
   };
 
-  const handleImageRemove = () => {};
+  const handleImageRemove = (singleImage) => {
+    setImageUrl(imageUrl.filter((image) => image !== singleImage));
+  };
 
   return (
     <div className="">
       <div className="">
-        {/* <label htmlFor={name} className="mb-2  inline-block">
-          {label}
-        </label> */}
         <div className="">
           <button
             type="button"
             onClick={() => hiddenFileInput.current?.click()}
             className={`bg-green-700 text-white text-sm font-bold px-3 py-1.5 rounded ${
-              imageFiles.length >= 4 && "hidden"
+              (imageUrl.length >= 4 || isMaxedOut || imageFiles.length > 4) &&
+              "hidden"
             }`}
           >
-            {/* {formik.values.imageUrl ? "Change" : "Add Profile Picture"} */}
             Add Images
           </button>
-          {imageFiles.length > 0 &&
-            (imageFiles.length <= 4 ? (
-              <div className="mt-4 flex items-center gap-5">
-                {imageFiles.map((singleImage, i) => (
-                  <div key={i} className=" relative w-[80px] h-[80px]">
+          {!isMaxedOut ? (
+            <div className="mt-4 flex items-center gap-5">
+              {imageUrl.length > 0 &&
+                imageUrl.map((singleImage, i) => (
+                  <div key={i} className=" relative">
                     <Image
-                      src={singleImage.preview}
+                      src={singleImage}
                       alt="image preview"
-                      layout="fill"
-                      objectFit="cover"
+                      width={100}
+                      height={100}
                     />
                     <button
                       type="button"
-                      className="absolute top-1 right-1 font-bold text-black bg-white p-1 rounded-full"
-                      onClick={() => {
-                        setImageFiles(
-                          imageFiles.filter(
-                            (image) => image.preview !== singleImage.preview
-                          )
-                        );
-                      }}
+                      className="absolute top-1 right-1 font-bold text-sm text-black bg-white p-1 rounded-full"
+                      onClick={() => handleImageRemove(singleImage)}
                     >
-                      x
+                      <FaTimes />
                     </button>
                   </div>
                 ))}
-              </div>
-            ) : (
-              <div className="flex items-center gap-2">
-                <p className="">Max Image reached</p>
+            </div>
+          ) : (
+            <div className="ml-3 sm:ml-0">
+              <p className="text-sm lg:text-base">
+                Maximum image limit reached.
+              </p>
+              <div className="">
                 <button
                   type="button"
-                  className="text-sm font-bold px-3 py-1 rounded bg-green-700"
-                  onClick={() => setImageFiles([])}
+                  className="mt-1 text-sm font-bold px-3 py-1 rounded bg-green-700"
+                  onClick={() => {
+                    setImageUrl([]);
+                    setIsMaxedOut(false);
+                  }}
                 >
                   Try again
                 </button>
               </div>
-            ))}
-          {/* {formik.values.imageUrl && (
-            <button
-              type="button"
-              className="bg-red-700 text-white text-sm font-bold px-3 py-1.5 rounded"
-              onClick={handleImageRemove}
-            >
-              Delete
-            </button>
-          )} */}
+            </div>
+          )}
         </div>
         <input
-          id={name}
           ref={hiddenFileInput}
           type="file"
-          name="images"
+          name="imageUrl"
           className="hidden"
           onChange={handleImageChange}
           accept="image/*"
           multiple={true}
-          required={required}
-          disabled={imageFiles.length >= 4}
+          disabled={imageUrl.length >= 4}
         />
       </div>
     </div>

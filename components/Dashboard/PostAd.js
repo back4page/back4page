@@ -20,6 +20,7 @@ import { countriesData } from "../data/countriesData";
 import ImageUpload from "./ImageUpload";
 import usePostData from "../../hooks/usePostData";
 import useEditData from "../../hooks/useEditData";
+import ImageField from "../common/ImageField";
 
 function PostAd({ formTitle, services, ad }) {
   const [locationArray, setLocationArray] = useState([]);
@@ -65,7 +66,10 @@ function PostAd({ formTitle, services, ad }) {
   const handleSubmit = (values, formik) => {
     const redirect = "/post-ad/preview/single";
     const type = "single";
-    !ad ? postData(values, formik, redirect) : editData(values, formik, type);
+    const isPreview = ad?.preview === 1 && true;
+    !ad
+      ? postData(values, formik, redirect)
+      : editData(values, formik, type, isPreview);
   };
 
   const sponsoredAdOptions = [
@@ -279,7 +283,7 @@ function PostAd({ formTitle, services, ad }) {
                     options={sponsoredAdOptions}
                   />
 
-                  <div className="grid grid-cols-3 mb-[18px]">
+                  {/* <div className="grid grid-cols-3 mb-[18px]">
                     <div className="">
                       <label htmlFor="images">Images </label>
                       <p className="text-xs">(Maximum 4 images)</p>
@@ -287,6 +291,17 @@ function PostAd({ formTitle, services, ad }) {
 
                     <div className="col-span-2">
                       <ImageUpload images={ad?.images} />
+                    </div>
+                  </div> */}
+
+                  <div className="grid grid-cols-3 mb-[18px]">
+                    <div className="">
+                      <label htmlFor="images">Images </label>
+                      <p className="text-xs">(Maximum 4 images)</p>
+                    </div>
+
+                    <div className="col-span-2">
+                      <ImageField images={ad?.images} />
                     </div>
                   </div>
 
@@ -303,7 +318,8 @@ function PostAd({ formTitle, services, ad }) {
                     <div className="col-start-2 col-span-2">
                       <button
                         type="submit"
-                        className=" button capitalize px-[12px] py-[7px]"
+                        className=" button capitalize px-[12px] py-[7px] disabled:opacity-50"
+                        disabled={!formik.values.images.length}
                       >
                         Post Ad
                       </button>

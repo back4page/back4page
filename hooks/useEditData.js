@@ -12,7 +12,7 @@ function useEditData(postId) {
   const { data } = useSession();
   const { token, id } = data ? data.user : "";
 
-  const editData = async (values, formik, type) => {
+  const editData = async (values, formik, type, isPreview) => {
     // console.log(values, url);
     // return;
 
@@ -56,7 +56,25 @@ function useEditData(postId) {
       // /ad/multiple
 
       // router.push(`/ad/multiple/${postId}`);
-      router.push(`/post-ad/preview/multiple/${postId}`);
+      const redirectByType = () => {
+        if (type === "single") {
+          if (isPreview) {
+            return `/post-ad/preview/single/${postId}`;
+          } else {
+            return `/ad/${postId}`;
+          }
+        }
+        if (type === "multiple") {
+          if (isPreview) {
+            return `/post-ad/preview/multiple/${postId}`;
+          } else {
+            return `/ad/multiple/${postId}`;
+          }
+        }
+      };
+
+      const redirectPath = redirectByType();
+      router.push(redirectPath);
 
       // isLive === true && router.push(`/ad/${postId}`);
       // isLive === false && router.push(`/post-ad/preview/${postId}`);

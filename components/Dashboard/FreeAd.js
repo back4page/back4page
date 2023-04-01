@@ -23,8 +23,8 @@ import ImageUpload from "./ImageUpload";
 import usePostData from "../../hooks/usePostData";
 import { useRouter } from "next/router";
 import useEditData from "../../hooks/useEditData";
-import ImageField from "../common/ImageField";
 import useImageUpload from "../../hooks/useImageUpload";
+import ImageField from "../common/ImageField";
 
 function FreeAd({ formTitle, services, ad }) {
   const [locationArray, setLocationArray] = useState([]);
@@ -44,10 +44,9 @@ function FreeAd({ formTitle, services, ad }) {
   //   return () => clearInterval(interval);
   // });
 
-  const [imageFiles, setImageFiles] = useState([]);
-  // const [imageUrl, setImageUrl] = useState(images || []);
-  // const [imageUrl, setImageUrl] = useState(ad?.images || []);
-
+  // const [imageFiles, setImageFiles] = useState([]);
+  // const [imageUrl, setImageUrl] = useState([]);
+  // const { uploadImage } = useImageUpload(imageFiles, imageUrl, setImageUrl);
   const initialvalues = {
     // location: locationArray,
     tag: "free",
@@ -75,41 +74,15 @@ function FreeAd({ formTitle, services, ad }) {
   const postId = ad?.id;
   const { editData } = useEditData(postId);
 
-  // const { uploadImage } = useImageUpload(imageFiles);
-
-  const handleSubmit = (values, formik) => {
-    // let formData = new FormData();
-    // Array.from(imageFiles).forEach((image) => {
-    //   formData.append("file", image.file[1]);
-    //   formData.append("upload_preset", "msz5dddv");
-
-    //   const upload = async () => {
-    //     const res = await fetch(
-    //       "https://api.cloudinary.com/v1_1/ddxy1wdgy/image/upload",
-    //       {
-    //         method: "POST",
-    //         body: formData,
-    //       }
-    //     );
-
-    //     const data = await res.json();
-
-    //     if (res.ok) {
-    //       console.log("success", data);
-    //       setImageUrl((prev) => [...prev, data.secure_url]);
-    //     } else {
-    //       console.log("failed", data);
-    //     }
-    //   };
-
-    //   upload();
-    // });
-
-    // uploadImage();
+  const handleSubmit = async (values, formik) => {
+    // uploadImage(values);
 
     const redirect = "post-ad/preview/single";
     const type = "single";
-    !ad ? postData(values, formik, redirect) : editData(values, formik, type);
+    const isPreview = ad?.preview === 1 && true;
+    !ad
+      ? postData(values, formik, redirect)
+      : editData(values, formik, type, isPreview);
   };
 
   const serviceOptions = services.map((category) => category?.name);
@@ -167,7 +140,7 @@ function FreeAd({ formTitle, services, ad }) {
         <div className="mt-4 py-4 border-t border-gray-800/50">
           <p className="mb-4 text-custom-yellow2 font-sans font-normal">
             Not enough credit. Please
-            <span className="link font-bold"> Buy Credit</span>
+            <span className="link font-bold">Buy Credit</span>
           </p>
 
           <Formik
@@ -238,18 +211,21 @@ function FreeAd({ formTitle, services, ad }) {
                     name="email"
                     type="email"
                     icon={<FaAt />}
+                    required
                   />
                   <TextField
                     label="Contact No."
                     name="phone"
                     type="text"
                     icon={<FaComments />}
+                    required
                   />
                   <TextField
                     label="Age"
                     name="age"
                     type="number"
                     icon={<FaHashtag />}
+                    required
                   />
 
                   {/* <div className="grid grid-cols-3 mb-[18px]">
@@ -259,13 +235,7 @@ function FreeAd({ formTitle, services, ad }) {
                     </div>
 
                     <div className="col-span-2">
-                      <ImageField
-                        label="Upload Images"
-                        name="images"
-                        imageFiles={imageFiles}
-                        setImageFiles={setImageFiles}
-                        required
-                      />
+                      <ImageUpload images={ad?.images} />
                     </div>
                   </div> */}
 
@@ -276,7 +246,7 @@ function FreeAd({ formTitle, services, ad }) {
                     </div>
 
                     <div className="col-span-2">
-                      <ImageUpload images={ad?.images} />
+                      <ImageField images={ad?.images} />
                     </div>
                   </div>
 
@@ -284,7 +254,8 @@ function FreeAd({ formTitle, services, ad }) {
                     <div className="col-start-2 col-span-2">
                       <button
                         type="submit"
-                        className=" button capitalize px-[12px] py-[7px]"
+                        className=" button capitalize px-[12px] py-[7px] disabled:opacity-50"
+                        disabled={!formik.values.images.length}
                       >
                         Post Ad
                       </button>
